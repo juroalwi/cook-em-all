@@ -1,4 +1,4 @@
-# <a href='https://jralvarezwindey-food-app.vercel.app'> Food App </a>
+# <a href='https://jralvarezwindey-food-app.vercel.app'> Cook 'Em All </a>
 
 Website: https://jralvarezwindey-food-app.vercel.app
 
