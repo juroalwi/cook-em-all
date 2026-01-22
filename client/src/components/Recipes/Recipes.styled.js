@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Recipes = styled.div`
   margin: 40px 40px;

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colors } from '../GlobalStyle.styled';
+import styled from "styled-components";
+import { colors } from "../GlobalStyle.styled";
 
 export const SearchBar = styled.form`
   all: unset;
@@ -7,7 +7,7 @@ export const SearchBar = styled.form`
   height: 60px;
   display: flex;
   align-items: center;
-`
+`;
 
 export const Query = styled.input`
   all: unset;
@@ -18,7 +18,7 @@ export const Query = styled.input`
   color: ${colors.BLACK};
   font-size: 16px;
   font-weight: 600;
-`
+`;
 
 export const Button = styled.button`
   all: unset;
@@ -29,16 +29,16 @@ export const Button = styled.button`
   align-items: center;
   background-color: ${colors.BLACK};
   cursor: pointer;
-`
+`;
 
 export const MagnifyingGlass = styled.svg`
   width: 38px;
   height: 38px;
   color: ${colors.WHITE};
   fill: currentColor;
-	transition: 100ms;
+  transition: 100ms;
 
   ${Button}:hover & {
     opacity: 0.8;
   }
-`
+`;

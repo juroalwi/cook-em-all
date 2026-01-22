@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Main = styled.div`
   min-height: 90.6vh;
@@ -7,7 +7,7 @@ export const Main = styled.div`
 `;
 
 export const Top = styled.div`
-  flex: 1 0 auto; 
+  flex: 1 0 auto;
   margin: 7px;
   padding: 7px;
   display: flex;

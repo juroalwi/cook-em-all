@@ -71,7 +71,7 @@ module.exports = async function getRecipes(req, res, next) {
         });
 
         const apiPromise = axios.get(
-          `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&query=${query}&number=100`
+          `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&query=${query}&number=100`,
         );
 
         const [dbResponse, apiResponse] = await Promise.all([

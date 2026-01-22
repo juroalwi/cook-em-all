@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colors } from '../GlobalStyle.styled';
+import styled from "styled-components";
+import { colors } from "../GlobalStyle.styled";
 
 export const NotFound = styled.div`
   margin: 90px;
@@ -11,4 +11,4 @@ export const NotFound = styled.div`
   font-size: 32px;
   background-color: ${colors.BLACK};
   color: ${colors.WHITE};
-`
+`;

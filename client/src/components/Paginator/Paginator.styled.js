@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { colors } from '../GlobalStyle.styled';
+import styled from "styled-components";
+import { colors } from "../GlobalStyle.styled";
 
 export const Paginator = styled.div`
   background-color: transparent;
-`
+`;
 
 export const Button = styled.button`
   height: 56px;
@@ -17,4 +17,4 @@ export const Button = styled.button`
   &:hover {
     background-color: #222;
   }
-`
+`;

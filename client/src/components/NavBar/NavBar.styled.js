@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import { colors } from '../GlobalStyle.styled';
+import styled from "styled-components";
+import { colors } from "../GlobalStyle.styled";
 
 export const NavBar = styled.nav`
   height: 90px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-	background-color: ${colors.BLACK};
+  background-color: ${colors.BLACK};
 `;
 
 export const Wrapper = styled.div`
@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const LogoContainer = styled.div`
   display: flex;
@@ -22,13 +22,13 @@ export const LogoContainer = styled.div`
   cursor: pointer;
   color: ${colors.WHITE};
   font-size: 30px;
-`
+`;
 
 export const Image = styled.img`
   margin: 10px 20px 0px 0px;
   height: 100px;
   filter: invert(0.8);
-`
+`;
 
 export const Button = styled.p`
   cursor: pointer;
@@ -40,4 +40,4 @@ export const Button = styled.p`
   &:hover {
     opacity: 0.8;
   }
-`
+`;

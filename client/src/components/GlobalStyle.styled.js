@@ -1,8 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
-import landingImage from '../media/landing.jpg'
-import logoImage from '../media/logo.svg';
-import createRecipeImage from '../media/create-recipe.jpg';
-import recipeDetailImage from '../media/recipe-detail.jpg';
+import { createGlobalStyle } from "styled-components";
+import landingImage from "../media/landing.jpg";
+import logoImage from "../media/logo.svg";
+import createRecipeImage from "../media/create-recipe.jpg";
+import recipeDetailImage from "../media/recipe-detail.jpg";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -38,11 +38,11 @@ input, textarea {
   color: #000;
   opacity: 0.6; 
 }
-`
+`;
 
 export const colors = {
-  BLACK: '#111',
-  WHITE: '#FAF0E0',
-  RED: '#FD1F4A',
-  YELLOW: '#FBBD0D',
-}
+  BLACK: "#111",
+  WHITE: "#FAF0E0",
+  RED: "#FD1F4A",
+  YELLOW: "#FBBD0D",
+};
