@@ -6,9 +6,8 @@ import axios from "axios";
 import store from "./redux/store.js";
 import App from "./App.jsx";
 
-axios.defaults.baseURL = `${
-  import.meta.env.VITE_API_URL || "http://localhost:3000"
-}/server`;
+axios.defaults.baseURL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000/server";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
