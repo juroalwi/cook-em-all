@@ -17,20 +17,20 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
 
 // Static frontend.
-app.use(express.static(path.join(__dirname, "client-build")));
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 // Routes middleware.
 const recipes = require("./routes/recipes");
 const diets = require("./routes/diets");
-app.use("/server/recipes", recipes);
-app.use("/server/diets", diets);
+app.use("/api/recipes", recipes);
+app.use("/api/diets", diets);
 
 // Error catching endware.
 app.use((error, req, res, next) => {
@@ -42,7 +42,7 @@ app.use((error, req, res, next) => {
 
 // React fallback.
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client-build", "index.html"));
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
 module.exports = app;
