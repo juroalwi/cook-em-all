@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import NavBar from "./components/NavBar/NavBar.js";
-import LandingPage from "./components/LandingPage/LandingPage.js";
-import Main from "./components/Main/Main.js";
-import RecipeDetail from "./components/RecipeDetail/RecipeDetail.js";
-import CreateRecipeSmart from "./components/CreateRecipe/CreateRecipeSmart.js";
+import NavBar from "./components/NavBar/NavBar.jsx";
+import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import Main from "./components/Main/Main.jsx";
+import RecipeDetail from "./components/RecipeDetail/RecipeDetail.jsx";
+import CreateRecipeSmart from "./components/CreateRecipe/CreateRecipeSmart.jsx";
 import { getDiets, getRecipes, setStatus } from "./redux/actions.js";
 import { GlobalStyle } from "./components/GlobalStyle.styled.js";
 
