@@ -1,22 +1,3 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 require("dotenv").config();
 const app = require("./app.js");
 const db = require("./db.js");
@@ -30,7 +11,7 @@ db.sync({ force: true }).then(async () => {
   console.log("Diets loaded.");
   await Promise.all(recipesLoader());
   console.log("Default recipes loaded.");
-  app.listen(process.env.PORT, () => {
-    console.log(`Server listening at ${process.env.PORT}.`);
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server listening at ${process.env.PORT || 3000}.`);
   });
 });
