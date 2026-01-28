@@ -23,9 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Static frontend.
-app.use(express.static(path.join(__dirname, "client/dist")));
-
 // Routes middleware.
 const recipes = require("./routes/recipes");
 const diets = require("./routes/diets");
@@ -40,9 +37,14 @@ app.use((error, req, res, next) => {
   res.status(status).send(message);
 });
 
+const clientDistPath = path.resolve(__dirname, "../client/dist");
+
+// Static frontend.
+app.use(express.static(clientDistPath));
+
 // React fallback.
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/dist/index.html"));
+  res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
 module.exports = app;
