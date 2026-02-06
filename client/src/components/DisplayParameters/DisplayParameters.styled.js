@@ -5,12 +5,12 @@ export const DisplayParameters = styled.div`
   @media (max-width: 1024px) {
     justify-content: space-evenly;
     gap: 32px;
-    margin-left: 0;
+    padding-left: 0;
   }
   display: flex;
   align-items: center;
+  padding-left: 128px;
   width: 100%;
-  margin-left: 128px;
   gap: 64px;
   color: ${colors.WHITE};
 `;
