@@ -5,9 +5,9 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import * as S from "./NavBar.styled.js";
 import logo from "../../media/logo.svg";
 import { getRecipes, setStatus } from "../../redux/actions.js";
+import ScreenSizeProvider from "../../providers/ScreenSizeProvider.jsx";
 
 export default function NavBar() {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,25 +18,23 @@ export default function NavBar() {
   }
 
   return (
-    <>
-      {location.pathname !== "/landing" && (
-        <S.NavBar>
-          <S.LogoContainer onClick={handleLogoClick}>
-            <S.Image src={logo} />
-            Cook 'Em All
-          </S.LogoContainer>
+    <ScreenSizeProvider>
+      <S.NavBar>
+        <S.LogoContainer onClick={handleLogoClick}>
+          <S.Image src={logo} />
+          <S.Title>Cook 'Em All</S.Title>
+        </S.LogoContainer>
 
-          <SearchBar />
+        <SearchBar />
 
-          <S.Wrapper>
-            <S.Button onClick={() => navigate("/")}>Home</S.Button>
+        <S.Wrapper>
+          <S.Button onClick={() => navigate("/")}>Home</S.Button>
 
-            <S.Button onClick={() => navigate("/recipe/create")}>
-              Create recipe
-            </S.Button>
-          </S.Wrapper>
-        </S.NavBar>
-      )}
-    </>
+          <S.Button onClick={() => navigate("/recipe/create")}>
+            Create recipe
+          </S.Button>
+        </S.Wrapper>
+      </S.NavBar>
+    </ScreenSizeProvider>
   );
 }
