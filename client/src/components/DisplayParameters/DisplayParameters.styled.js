@@ -2,100 +2,97 @@ import styled from "styled-components";
 import { colors } from "../GlobalStyle.styled";
 
 export const DisplayParameters = styled.div`
-  margin: 55px 10px;
-  min-height: 1020px;
+  @media (max-width: 1024px) {
+    justify-content: space-evenly;
+    gap: 32px;
+    margin-left: 0;
+  }
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-size: 20px;
+  align-items: center;
+  width: 100%;
+  margin-left: 128px;
+  gap: 64px;
   color: ${colors.WHITE};
 `;
 
-export const Filters = styled.div`
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 0px 8px 16px 0px rgba(55, 55, 55, 0.8);
-`;
-
-export const FiltersTitle = styled.div`
-  margin: 30px 0px 40px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  font-size: 36px;
+export const FiltersButton = styled.div`
+  font-size: 20px;
   font-weight: 600;
+  padding: 12px 16px;
+  transition: 200ms;
 `;
 
-export const Filter = styled.span`
-  margin: 9px;
-  padding: 6px 16px;
-  height: 36px;
-  border-radius: 80px;
-  cursor: pointer;
-  background-color: ${(props) => (props.active ? colors.RED : colors.BLACK)};
-  text-align: center;
-  transition: 100ms;
+export const SortButtton = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: 200ms;
+`;
 
+export const FiltersDropdown = styled.div`
+  position: absolute;
+  z-index: 1;
+  max-width: 300px;
+  width: 100%;
+  display: none;
+  background-color: black;
+  box-shadow: 2px 4px 16px 0px rgba(45, 45, 45);
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px;
+`;
+
+export const SortDropdown = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  max-width: 180px;
+  display: none;
+  background-color: black;
+  box-shadow: 2px 4px 16px 0px rgba(45, 45, 45);
+`;
+
+export const FilterItem = styled.span`
+  padding: 4px 10px;
+  border-radius: 80px;
+  background-color: ${(props) => (props.active ? colors.RED : colors.BLACK)};
+  font-size: 16px;
+  transition: 200ms;
   &:hover {
     opacity: 0.8;
   }
 `;
 
-export const DropdownButton = styled.div`
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 4px 8px 0px rgba(55, 55, 55, 0.8);
-  cursor: pointer;
-  background-color: ${colors.BLACK};
-  color: ${colors.WHITE};
-  font-size: 28px;
-  font-weight: 600;
-  transition: 200ms;
-
-  &:hover {
-    opacity: 0.6;
-  }
-`;
-
-export const DropdownContent = styled.div`
-  visibility: hidden;
-  height: 0;
-  opacity: 0;
-  box-shadow: 0px 8px 16px 0px rgba(55, 55, 55, 0.8);
-  color: ${colors.WHITE};
-  transition:
-    visibility 200ms,
-    opacity 200ms linear;
-`;
-
-export const DropdownContentSortCriteria = styled.p`
+export const SortItem = styled.p`
   padding: 12px 16px;
-  cursor: default;
   color: ${(props) => (props.active ? colors.RED : colors.WHITE)};
-  font-size: 22px;
-  font-weight: 600;
-
+  font-size: 16px;
+  transition: 200ms;
   &:hover {
     background-color: ${colors.WHITE};
     color: ${(props) => (props.active ? colors.RED : colors.BLACK)};
   }
 `;
 
-export const OrderBy = styled.div`
-  align-self: center;
-  width: 195px;
-
-  &:hover ${DropdownContent} {
-    visibility: visible;
-    height: auto;
-    opacity: 1;
+export const FiltersSection = styled.div`
+  position: "relative";
+  cursor: pointer;
+  &:hover ${FiltersDropdown} {
+    display: flex;
   }
+  &:hover ${FiltersButton} {
+    opacity: 0.8;
+  }
+`;
 
-  &:hover ${DropdownButton} {
+export const SortSection = styled.div`
+  position: "relative";
+  cursor: pointer;
+  &:hover ${SortDropdown} {
+    display: block;
+  }
+  &:hover ${SortButtton} {
     box-shadow: 0px 0px 0px 0px;
+    opacity: 0.8;
   }
 `;

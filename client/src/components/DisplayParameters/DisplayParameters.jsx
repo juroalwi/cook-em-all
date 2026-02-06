@@ -7,7 +7,7 @@ export default function DisplayParameters() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const { diets } = useSelector((state) => state);
   const { sortCriteria } = useSelector(
-    (state) => state.recipesDisplayParameters
+    (state) => state.recipesDisplayParameters,
   );
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export default function DisplayParameters() {
     const index = selectedFilters.indexOf(filter);
     index !== -1
       ? setSelectedFilters(
-          selectedFilters.filter((selectedFilter) => selectedFilter !== filter)
+          selectedFilters.filter((selectedFilter) => selectedFilter !== filter),
         )
       : setSelectedFilters([...selectedFilters, filter]);
 
@@ -28,45 +28,47 @@ export default function DisplayParameters() {
 
   return (
     <S.DisplayParameters>
-      <S.OrderBy>
-        <S.DropdownButton>Order by</S.DropdownButton>
-        <S.DropdownContent>
-          <S.DropdownContentSortCriteria
+      <S.SortSection>
+        <S.SortButtton>Order by</S.SortButtton>
+        <S.SortDropdown>
+          <S.SortItem
             active={sortCriteria === "az"}
             onClick={() => handleOrder("az")}
           >
             (a-z)
-          </S.DropdownContentSortCriteria>
-          <S.DropdownContentSortCriteria
+          </S.SortItem>
+          <S.SortItem
             active={sortCriteria === "za"}
             onClick={() => handleOrder("za")}
           >
             (z-a)
-          </S.DropdownContentSortCriteria>
-          <S.DropdownContentSortCriteria
+          </S.SortItem>
+          <S.SortItem
             active={sortCriteria === "score"}
             onClick={() => handleOrder("score")}
           >
             score
-          </S.DropdownContentSortCriteria>
-        </S.DropdownContent>
-      </S.OrderBy>
+          </S.SortItem>
+        </S.SortDropdown>
+      </S.SortSection>
 
-      <S.Filters>
-        <S.FiltersTitle>Filter by</S.FiltersTitle>
-        {diets.map((diet, index) => {
-          const active = selectedFilters.includes(diet);
-          return (
-            <S.Filter
-              key={index}
-              active={active}
-              onClick={() => handleFilter(diet, index)}
-            >
-              {diet}
-            </S.Filter>
-          );
-        })}
-      </S.Filters>
+      <S.FiltersSection>
+        <S.FiltersButton>Filter by</S.FiltersButton>
+        <S.FiltersDropdown>
+          {diets.map((diet, index) => {
+            const active = selectedFilters.includes(diet);
+            return (
+              <S.FilterItem
+                key={index}
+                active={active}
+                onClick={() => handleFilter(diet, index)}
+              >
+                {diet}
+              </S.FilterItem>
+            );
+          })}
+        </S.FiltersDropdown>
+      </S.FiltersSection>
     </S.DisplayParameters>
   );
 }
