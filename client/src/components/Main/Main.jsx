@@ -18,15 +18,9 @@ export default function Main() {
     case "displaying":
       return (
         <S.Main>
-          <S.Top>
-            <S.Left>
-              <DisplayParameters />
-            </S.Left>
+          <DisplayParameters />
 
-            <S.Right>
-              <Recipes />
-            </S.Right>
-          </S.Top>
+          <Recipes />
 
           <S.Bottom>
             <Paginator />
