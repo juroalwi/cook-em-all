@@ -1,51 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPage } from '../../redux/actions.js';
-import * as S from './Paginator.styled.js';
-import { colors } from '../GlobalStyle.styled.js';
+import * as S from "./Paginator.styled.js";
+import { colors } from "../GlobalStyle.styled.js";
+import useScreenSize from "../../hooks/useScreenSize.js";
+import RightArrowIcon from "../../media/icons/RightArrowIcon.jsx";
+import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
+import useRecipes from "../../hooks/useRecipes.js";
 
 export default function Paginator() {
-  const [pages, setPages] = useState([]);
-  const { displayed } = useSelector(state => state.recipes);
-  const currentPage = useSelector(state => state.recipesDisplayParameters.page);
-  const dispatch = useDispatch();
+  const { isMobile } = useScreenSize();
+  const { setRecipesPage, recipesPage, recipesMaxPage } = useRecipes();
 
-  useEffect(() => {
-    setPages(paginatorButtonsGenerator([...displayed]))
-  }, [displayed]);
-
-  function paginatorButtonsGenerator(recipes) {
-    const pages = [];
-    let i = 0;
-    while (recipes.length > 0) {
-      recipes = recipes.slice(9);
-      pages.push(i++)
-    }
-    return pages;
+  function handlePageChange(newPage) {
+    setRecipesPage(newPage);
   }
-  
-  function handleClick(newCurrentPage) {
-    dispatch(setPage(newCurrentPage));
-  };
+
+  const pages = [...Array(recipesMaxPage).keys()].map((i) => i + 1);
+
+  if (isMobile) {
+    return (
+      <S.MobileContainer>
+        {recipesPage > 0 && (
+          <LeftArrowIcon
+            fill={colors.WHITE}
+            onClick={() => handlePageChange(recipesPage - 1)}
+          />
+        )}
+        <S.CurrentPage>{recipesPage + 1}</S.CurrentPage>
+        {recipesPage < recipesMaxPage && (
+          <RightArrowIcon
+            fill={colors.WHITE}
+            onClick={() => handlePageChange(recipesPage + 1)}
+          />
+        )}
+      </S.MobileContainer>
+    );
+  }
 
   return (
-    <S.Paginator> 
-      { pages.length > 1 && pages.map((page, index) => {
-        const selectedButtonStyle = index === currentPage 
-          ? { backgroundColor: colors.RED }
-          : undefined;
-        return (
-          <S.Button 
-            key={ index }
-            style={ selectedButtonStyle }
-            onClick={ () => handleClick(index) }>
-            { index + 1}
-          </S.Button>
-        );
-      }) }
+    <S.Paginator>
+      {pages.length > 1 &&
+        pages.map((page) => {
+          const selectedButtonStyle =
+            page === recipesPage ? { backgroundColor: colors.RED } : undefined;
+          return (
+            <S.Button
+              key={page}
+              style={selectedButtonStyle}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </S.Button>
+          );
+        })}
     </S.Paginator>
-  )
-};
-
-
-
+  );
+}

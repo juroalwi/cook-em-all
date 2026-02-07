@@ -1,60 +1,108 @@
 import axios from "axios";
+import {
+  SET_DIETS,
+  SET_DIETS_STATUS,
+  SET_RECIPES,
+  SET_RECIPES_FILTERS,
+  SET_RECIPES_STATUS,
+  SET_RECIPES_INDEX,
+  SET_RECIPES_SORT_BY,
+} from "./reducer";
+import { fetchStatus } from "../utils/constants";
 
-export const GET_DIETS = "GET_DIETS";
-export const GET_RECIPES = "GET_RECIPES";
-export const FILTER_RECIPES = "FILTER_RECIPES";
-export const SORT_RECIPES = "SORT_RECIPES";
-export const SET_PAGE = "SET_PAGE";
-export const SET_STATUS = "SET_STATUS";
-
-export function getDiets(diets) {
-  return {
-    type: GET_DIETS,
-    payload: diets,
-  };
-}
-
-export function getRecipes(query, { defaultRecipes }) {
+export function fetchDiets() {
   return async function (dispatch) {
+    dispatch({
+      type: SET_DIETS_STATUS,
+      payload: fetchStatus.LOADING,
+    });
     try {
-      const response = await axios.get(
-        `/recipes?title=${query}&defaultRecipes=${defaultRecipes}`,
-      );
-      const recipes = response.data;
+      const response = await axios.get(`/diets`);
+      const diets = response.data;
+      if (!diets.length) {
+        dispatch({
+          type: SET_DIETS_STATUS,
+          payload: fetchStatus.NOT_FOUND,
+        });
+      } else {
+        dispatch({
+          type: SET_DIETS_STATUS,
+          payload: fetchStatus.SUCCESS,
+        });
+      }
       dispatch({
-        type: GET_RECIPES,
-        payload: recipes,
+        type: SET_DIETS,
+        payload: diets,
       });
     } catch (error) {
       console.error(error);
+      dispatch({
+        type: SET_DIETS_STATUS,
+        payload: fetchStatus.ERROR,
+      });
+      dispatch({
+        type: SET_DIETS,
+        payload: [],
+      });
     }
   };
 }
 
-export function filterRecipes(filter) {
-  return {
-    type: FILTER_RECIPES,
-    payload: filter,
+export function fetchRecipes(query) {
+  return async function (dispatch) {
+    dispatch({
+      type: SET_RECIPES_STATUS,
+      payload: fetchStatus.LOADING,
+    });
+    try {
+      const response = await axios.get(`/recipes?title=${query}`);
+      const recipes = response.data;
+      if (!recipes.length) {
+        dispatch({
+          type: SET_RECIPES_STATUS,
+          payload: fetchStatus.NOT_FOUND,
+        });
+      } else {
+        dispatch({
+          type: SET_RECIPES_STATUS,
+          payload: fetchStatus.SUCCESS,
+        });
+      }
+      dispatch({
+        type: SET_RECIPES,
+        payload: recipes,
+      });
+    } catch (error) {
+      console.error(error);
+      dispatch({
+        type: SET_RECIPES_STATUS,
+        payload: fetchStatus.ERROR,
+      });
+      dispatch({
+        type: SET_RECIPES,
+        payload: [],
+      });
+    }
   };
 }
 
-export function sortRecipes(sortCriteria) {
+export function setRecipesFilters(filters) {
   return {
-    type: SORT_RECIPES,
-    payload: sortCriteria,
+    type: SET_RECIPES_FILTERS,
+    payload: filters,
   };
 }
 
-export function setPage(pageNumber) {
+export function setRecipesSortBy(sortBy) {
   return {
-    type: SET_PAGE,
-    payload: pageNumber,
+    type: SET_RECIPES_SORT_BY,
+    payload: sortBy,
   };
 }
 
-export function setStatus(status) {
+export function setRecipesIndex(index) {
   return {
-    type: SET_STATUS,
-    payload: status,
+    type: SET_RECIPES_INDEX,
+    payload: index,
   };
 }

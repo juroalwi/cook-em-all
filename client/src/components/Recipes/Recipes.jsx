@@ -1,18 +1,43 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Recipe from "../Recipe/Recipe.jsx";
 import * as S from "./Recipes.styled.js";
+import useRecipes from "../../hooks/useRecipes.js";
+import useDiets from "../../hooks/useDiets.js";
+import DisplayParameters from "../DisplayParameters/DisplayParameters.jsx";
+import Paginator from "../Paginator/Paginator.jsx";
+import Loading from "../Loading/Loading.jsx";
+import RecipesNotFound from "../RecipesNotFound/RecipesNotFound.jsx";
+import { fetchStatus } from "../../utils/constants.js";
 
 export default function Recipes() {
-  const { displayed } = useSelector((state) => state.recipes);
-  const page = useSelector((state) => state.recipesDisplayParameters.page);
-  const cardsPerPage = 9;
+  const { displayedRecipes, recipesStatus, setRecipesFilters, fetchRecipes } =
+    useRecipes();
+  const { dietsStatus } = useDiets();
+
+  if (
+    recipesStatus === fetchStatus.LOADING ||
+    dietsStatus === fetchStatus.LOADING
+  ) {
+    return <Loading />;
+  }
+
+  if (recipesStatus === fetchStatus.NOT_FOUND) {
+    return (
+      <Wrapper>
+        <RecipesNotFound
+          onReset={() => {
+            fetchRecipes(null);
+            setRecipesFilters([]);
+          }}
+        />
+      </Wrapper>
+    );
+  }
 
   return (
-    <S.Recipes>
-      {displayed
-        ?.slice(page * cardsPerPage, (page + 1) * cardsPerPage)
-        .map((recipe) => {
+    <Wrapper>
+      <S.Recipes>
+        {displayedRecipes.map((recipe) => {
           return (
             <Recipe
               key={recipe.id}
@@ -24,6 +49,21 @@ export default function Recipes() {
             />
           );
         })}
-    </S.Recipes>
+      </S.Recipes>
+    </Wrapper>
+  );
+}
+
+function Wrapper({ children }) {
+  return (
+    <S.Wrapper>
+      <DisplayParameters />
+
+      {children}
+
+      <S.Bottom>
+        <Paginator />
+      </S.Bottom>
+    </S.Wrapper>
   );
 }

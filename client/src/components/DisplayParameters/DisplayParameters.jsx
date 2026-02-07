@@ -1,67 +1,41 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { filterRecipes, sortRecipes } from "../../redux/actions.js";
 import * as S from "./DisplayParameters.styled.js";
+import useRecipes from "../../hooks/useRecipes.js";
+import useDiets from "../../hooks/useDiets.js";
 
 export default function DisplayParameters() {
-  const [selectedFilters, setSelectedFilters] = useState([]);
-  const { diets } = useSelector((state) => state);
-  const { sortCriteria } = useSelector(
-    (state) => state.recipesDisplayParameters,
-  );
-  const dispatch = useDispatch();
+  const { diets } = useDiets();
+  const { setRecipesFilters, setRecipesSortBy, recipesFilters, recipesSortBy } =
+    useRecipes();
 
-  function handleFilter(filter) {
-    const index = selectedFilters.indexOf(filter);
-    index !== -1
-      ? setSelectedFilters(
-          selectedFilters.filter((selectedFilter) => selectedFilter !== filter),
-        )
-      : setSelectedFilters([...selectedFilters, filter]);
-
-    dispatch(filterRecipes(filter));
+  function handleFiltersUpdate(filter) {
+    const index = recipesFilters.indexOf(filter);
+    setRecipesFilters(
+      index !== -1
+        ? recipesFilters.filter((selectedFilter) => selectedFilter !== filter)
+        : [...recipesFilters, filter],
+    );
   }
 
-  function handleOrder(sortCriteria) {
-    dispatch(sortRecipes(sortCriteria));
+  function handleSortByUpdate(sortBy) {
+    if (sortBy === recipesSortBy) {
+      setRecipesSortBy(null);
+    } else {
+      setRecipesSortBy(sortBy);
+    }
   }
 
   return (
     <S.DisplayParameters>
-      <S.SortSection>
-        <S.SortButtton>Order by</S.SortButtton>
-        <S.SortDropdown>
-          <S.SortItem
-            active={sortCriteria === "az"}
-            onClick={() => handleOrder("az")}
-          >
-            (a-z)
-          </S.SortItem>
-          <S.SortItem
-            active={sortCriteria === "za"}
-            onClick={() => handleOrder("za")}
-          >
-            (z-a)
-          </S.SortItem>
-          <S.SortItem
-            active={sortCriteria === "score"}
-            onClick={() => handleOrder("score")}
-          >
-            score
-          </S.SortItem>
-        </S.SortDropdown>
-      </S.SortSection>
-
       <S.FiltersSection>
-        <S.FiltersButton>Filter by</S.FiltersButton>
+        <S.FiltersButton>Filters ({recipesFilters.length})</S.FiltersButton>
         <S.FiltersDropdown>
           {diets.map((diet, index) => {
-            const active = selectedFilters.includes(diet);
+            const active = recipesFilters.includes(diet);
             return (
               <S.FilterItem
                 key={index}
                 active={active}
-                onClick={() => handleFilter(diet, index)}
+                onClick={() => handleFiltersUpdate(diet, index)}
               >
                 {diet}
               </S.FilterItem>
@@ -69,6 +43,35 @@ export default function DisplayParameters() {
           })}
         </S.FiltersDropdown>
       </S.FiltersSection>
+
+      <S.SortSection>
+        <S.SortButtton>
+          Sort
+          {recipesSortBy
+            ? `: ${recipesSortBy === "az" ? "a-z" : recipesSortBy === "za" ? "z-a" : "score"}`
+            : ""}
+        </S.SortButtton>
+        <S.SortDropdown>
+          <S.SortItem
+            active={recipesSortBy === "az"}
+            onClick={() => handleSortByUpdate("az")}
+          >
+            (a-z)
+          </S.SortItem>
+          <S.SortItem
+            active={recipesSortBy === "za"}
+            onClick={() => handleSortByUpdate("za")}
+          >
+            (z-a)
+          </S.SortItem>
+          <S.SortItem
+            active={recipesSortBy === "score"}
+            onClick={() => handleSortByUpdate("score")}
+          >
+            score
+          </S.SortItem>
+        </S.SortDropdown>
+      </S.SortSection>
     </S.DisplayParameters>
   );
 }

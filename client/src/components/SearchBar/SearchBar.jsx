@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getRecipes, setStatus } from "../../redux/actions.js";
 import * as S from "./SearchBar.styled.js";
+import useRecipes from "../../hooks/useRecipes.js";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
-  const dispatch = useDispatch();
+  const { fetchRecipes } = useRecipes();
   const navigate = useNavigate();
 
   function handleChange(event) {
@@ -15,8 +14,7 @@ export default function SearchBar() {
 
   useEffect(() => {
     const id = setTimeout(() => {
-      dispatch(setStatus("loading"));
-      dispatch(getRecipes(query, { defaultRecipes: false }));
+      fetchRecipes(query);
       navigate("/");
     }, 400);
     return () => clearTimeout(id);
