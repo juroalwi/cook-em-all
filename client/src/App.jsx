@@ -1,33 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import axios from "axios";
 import NavBar from "./components/NavBar/NavBar.jsx";
-import Main from "./components/Main/Main.jsx";
+import Recipes from "./components/Recipes/Recipes.jsx";
 import RecipeDetail from "./components/RecipeDetail/RecipeDetail.jsx";
 import CreateRecipeSmart from "./components/CreateRecipe/CreateRecipeSmart.jsx";
-import { getDiets, getRecipes, setStatus } from "./redux/actions.js";
 import { GlobalStyle } from "./components/GlobalStyle.styled.js";
 import useScreenSize from "./hooks/useScreenSize.js";
+import useDiets from "./hooks/useDiets.js";
+import useRecipes from "./hooks/useRecipes.js";
 
 export default function App() {
-  const dispatch = useDispatch();
+  const { fetchDiets } = useDiets();
+  const { fetchRecipes } = useRecipes();
   const { isMobile } = useScreenSize();
 
   useEffect(() => {
-    (async function () {
-      dispatch(setStatus("loading"));
-      try {
-        const response = await axios.get(`/diets`);
-        const diets = response.data;
-        dispatch(getDiets(diets));
-      } catch (error) {
-        console.error(error);
-      }
-
-      dispatch(getRecipes(null, { defaultRecipes: true }));
-    })();
+    fetchDiets();
+    fetchRecipes();
   }, []);
 
   return (
@@ -35,11 +25,16 @@ export default function App() {
       style={
         isMobile
           ? {
+              minHeight: "100vh",
               maxWidth: "600px",
               marginRight: "auto",
               marginLeft: "auto",
             }
-          : {}
+          : {
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }
       }
     >
       <GlobalStyle />
@@ -47,7 +42,7 @@ export default function App() {
       <Routes>
         <Route path="/recipe/detail/:id" element={<RecipeDetail />} />
         <Route path="/recipe/create" element={<CreateRecipeSmart />} />
-        <Route path="/*" element={<Main />} index={true} />
+        <Route path="/*" element={<Recipes />} index={true} />
       </Routes>
     </div>
   );
