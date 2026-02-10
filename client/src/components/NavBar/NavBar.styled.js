@@ -3,9 +3,12 @@ import { colors } from "../GlobalStyle.styled";
 
 export const NavBar = styled.nav`
   @media (max-width: 1024px) {
+    background-color: transparent;
     flex-direction: column-reverse;
+    padding: 4px 16px;
     gap: 16px;
   }
+  background-color: ${colors.BLACK};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,8 +17,8 @@ export const NavBar = styled.nav`
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 32px;
@@ -25,11 +28,11 @@ export const LogoContainer = styled.div`
   @media (max-width: 1024px) {
     display: none;
   }
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
-  cursor: pointer;
-  width: 100%;
 `;
 
 export const Title = styled.div`
@@ -42,9 +45,13 @@ export const Title = styled.div`
 export const Image = styled.img`
   height: 70px;
   filter: invert(0.8);
+  cursor: pointer;
 `;
 
 export const Button = styled.p`
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
   cursor: pointer;
   color: ${colors.WHITE};
   font-size: 20px;

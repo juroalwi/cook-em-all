@@ -43,6 +43,6 @@ input, textarea {
 export const colors = {
   BLACK: "#111",
   WHITE: "#FAF0E0",
-  RED: "#FD1F4A",
+  RED: "#FF2B55",
   YELLOW: "#FBBD0D",
 };
