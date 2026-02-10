@@ -3,7 +3,7 @@ import Recipe from "../Recipe/Recipe.jsx";
 import * as S from "./Recipes.styled.js";
 import useRecipes from "../../hooks/useRecipes.js";
 import useDiets from "../../hooks/useDiets.js";
-import DisplayParameters from "../DisplayParameters/DisplayParameters.jsx";
+import RecipesFilters from "../RecipesFilters/RecipesFilters.jsx";
 import Paginator from "../Paginator/Paginator.jsx";
 import Loading from "../Loading/Loading.jsx";
 import RecipesNotFound from "../RecipesNotFound/RecipesNotFound.jsx";
@@ -56,14 +56,16 @@ export default function Recipes() {
 
 function Wrapper({ children }) {
   return (
-    <S.Wrapper>
-      <DisplayParameters />
+    <S.Container>
+      <S.Top>
+        <RecipesFilters />
+      </S.Top>
 
       {children}
 
       <S.Bottom>
         <Paginator />
       </S.Bottom>
-    </S.Wrapper>
+    </S.Container>
   );
 }
