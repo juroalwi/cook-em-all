@@ -26,7 +26,8 @@ export default function App() {
         isMobile
           ? {
               minHeight: "100vh",
-              maxWidth: "600px",
+              maxWidth: "480px",
+              minWidth: "300px",
               marginRight: "auto",
               marginLeft: "auto",
             }
