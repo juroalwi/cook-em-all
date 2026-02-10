@@ -55,7 +55,8 @@ export function fetchRecipes(query) {
       payload: fetchStatus.LOADING,
     });
     try {
-      const response = await axios.get(`/recipes?title=${query}`);
+      const safeQuery = typeof query !== "string" ? "" : query;
+      const response = await axios.get(`/recipes?title=${safeQuery}`);
       const recipes = response.data;
       if (!recipes.length) {
         dispatch({
