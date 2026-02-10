@@ -9,9 +9,7 @@ export default function Recipe(props) {
 
          <S.Info> 
             <S.Title>{ props.title }</S.Title>
-
             <S.Score percentage={ props.score * 20 }> ({ props.score })</S.Score>
-
             <S.Diets>
                { props.diets.map((diet, index) => {
                   return (

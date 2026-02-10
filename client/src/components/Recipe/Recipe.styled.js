@@ -2,10 +2,13 @@ import styled from "styled-components";
 import { colors } from "../GlobalStyle.styled";
 
 export const Recipe = styled.div`
+  @media (max-width: 360px) {
+    height: 440px;
+  }
   position: relative;
-  margin: 15px;
-  width: 435px;
-  height: 540px;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,6 +16,9 @@ export const Recipe = styled.div`
 `;
 
 export const Image = styled.img`
+  @media (max-width: 360px) {
+    min-height: 240px;
+  }
   min-height: 300px;
   background-size: cover;
 `;
@@ -20,15 +26,14 @@ export const Image = styled.img`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
+  padding: 16px;
 `;
 
 export const Title = styled.h1`
-  margin: 25px 27px 0px;
   color: ${colors.BLACK};
-  text-align: left;
-  font-size: 26px;
-  font-weight: normal;
+  font-size: 24px;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-overflow: ellipsis;
@@ -37,14 +42,13 @@ export const Title = styled.h1`
 `;
 
 export const Score = styled.div`
-  margin: 5px 10px 5px;
-  font-size: 18px;
-
+  position: relative;
+  font-size: 16px;
   &:before {
     position: relative;
-    top: 3px;
+    top: 2px;
     content: "★★★★★";
-    font-size: 32px;
+    font-size: 26px;
     background: ${(props) =>
       `linear-gradient(90deg, #FBBD0D ${props.percentage}%, #2D2C2E ${props.percentage}%)`};
     background-clip: text;
@@ -54,12 +58,10 @@ export const Score = styled.div`
 `;
 
 export const Diets = styled.ul`
-  margin: 10px 5px 20px;
-  width: auto;
   display: flex;
   flex-wrap: no-wrap;
+  gap: 6px;
   overflow-x: scroll;
-
   ::-webkit-scrollbar {
     display: none; /* Hide scrollbar in Chrome, Safari and Opera. */
     scrollbar-width: none; /* Hide in Firefox. */
@@ -68,13 +70,10 @@ export const Diets = styled.ul`
 `;
 
 export const Diet = styled.li`
-  flex-shrink: 0;
-  margin: 0px 5px;
-  padding: 2px 9px;
+  white-space: nowrap;
+  padding: 2px 8px;
   width: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 16px;
   border-radius: 20px;
   background-color: ${colors.BLACK};
@@ -82,17 +81,16 @@ export const Diet = styled.li`
 `;
 
 export const DetailButton = styled.button`
-  height: 60px;
+  height: 55px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${colors.RED};
   color: ${colors.WHITE};
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 0.1em;
-  transition: 250ms;
-
+  transition: 200ms;
   &:hover {
     background: ${colors.YELLOW};
   }
