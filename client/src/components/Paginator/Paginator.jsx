@@ -1,5 +1,3 @@
-import * as S from "./Paginator.styled.js";
-import { colors } from "../GlobalStyle.styled.js";
 import useScreenSize from "../../hooks/useScreenSize.js";
 import RightArrowIcon from "../../media/icons/RightArrowIcon.jsx";
 import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
@@ -17,40 +15,43 @@ export default function Paginator() {
 
   if (isMobile) {
     return (
-      <S.MobileContainer>
+      <div className="flex items-center gap-8">
         {recipesPage > 0 && (
           <LeftArrowIcon
-            fill={colors.WHITE}
+            fill="#FAF0E0"
             onClick={() => handlePageChange(recipesPage - 1)}
           />
         )}
-        <S.CurrentPage>{recipesPage + 1}</S.CurrentPage>
+        <div className="text-2xl font-semibold text-custom-white">
+          {recipesPage + 1}
+        </div>
         {recipesPage < recipesMaxPage && (
           <RightArrowIcon
-            fill={colors.WHITE}
+            fill="#FAF0E0"
             onClick={() => handlePageChange(recipesPage + 1)}
           />
         )}
-      </S.MobileContainer>
+      </div>
     );
   }
 
   return (
-    <S.Paginator>
+    <div className="bg-transparent">
       {pages.length > 1 &&
         pages.map((page) => {
-          const selectedButtonStyle =
-            page === recipesPage ? { backgroundColor: colors.RED } : undefined;
+          const isSelected = page === recipesPage;
           return (
-            <S.Button
+            <button
               key={page}
-              style={selectedButtonStyle}
+              className={`h-14 w-14 text-xl font-semibold bg-transparent text-custom-white transition-colors duration-300 hover:bg-gray-800 ${
+                isSelected ? "bg-custom-red" : ""
+              }`}
               onClick={() => handlePageChange(page)}
             >
               {page}
-            </S.Button>
+            </button>
           );
         })}
-    </S.Paginator>
+    </div>
   );
 }

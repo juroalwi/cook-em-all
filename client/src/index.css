@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@theme {
+  --font-montserrat: Montserrat, sans-serif;
+  --color-custom-black: #111;
+  --color-custom-white: #faf0e0;
+  --color-custom-red: #ff2b55;
+  --color-custom-yellow: #fbbd0d;
+  --animate-dot-expansion: expansion 2s infinite;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-montserrat);
+  list-style-type: none;
+  text-decoration: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background-color: black;
+}
+
+button {
+  outline: none;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+::placeholder {
+  color: black;
+  opacity: 0.6;
+}
+
+/* Loading animation for dots */
+.loading-dot {
+  position: relative;
+  animation: expansion 2s infinite;
+}
+
+.loading-dot::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-custom-yellow);
+  animation: expansion 2s infinite;
+}
+
+.loading-dot-0 {
+  animation-delay: -1s;
+}
+
+.loading-dot-0::after {
+  animation-delay: -0.9s;
+}
+
+.loading-dot-1 {
+  animation-delay: -0.9s;
+}
+
+.loading-dot-1::after {
+  animation-delay: -0.8s;
+}
+
+.loading-dot-2 {
+  animation-delay: -0.8s;
+}
+
+.loading-dot-2::after {
+  animation-delay: -0.7s;
+}
+
+.loading-dot-3 {
+  animation-delay: -0.7s;
+}
+
+.loading-dot-3::after {
+  animation-delay: -0.6s;
+}
+
+.loading-dot-4 {
+  animation-delay: -0.6s;
+}
+
+.loading-dot-4::after {
+  animation-delay: -0.5s;
+}
+
+.light-shadow {
+  box-shadow: 2px 4px 16px 0px rgba(45, 45, 45, 1);
+}
+
+.light-shadow-small {
+  box-shadow: 1px 2px 8px 0px rgba(45, 45, 45, 1);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 9px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-custom-white);
+  border-radius: 10px;
+}
+
+.custom-scrollbar-dark::-webkit-scrollbar {
+  width: 9px;
+}
+
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+  background-color: var(--color-custom-black);
+  border-radius: 10px;
+}
+
+@keyframes expansion {
+  0%,
+  50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

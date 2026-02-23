@@ -1,6 +1,5 @@
 import React from "react";
 import Recipe from "../Recipe/Recipe.jsx";
-import * as S from "./Recipes.styled.js";
 import useRecipes from "../../hooks/useRecipes.js";
 import useDiets from "../../hooks/useDiets.js";
 import RecipesFilters from "../RecipesFilters/RecipesFilters.jsx";
@@ -36,7 +35,7 @@ export default function Recipes() {
 
   return (
     <Wrapper>
-      <S.Recipes>
+      <div className="flex justify-center flex-wrap gap-8">
         {displayedRecipes.map((recipe) => {
           return (
             <Recipe
@@ -49,23 +48,23 @@ export default function Recipes() {
             />
           );
         })}
-      </S.Recipes>
+      </div>
     </Wrapper>
   );
 }
 
 function Wrapper({ children }) {
   return (
-    <S.Container>
-      <S.Top>
+    <div className="flex flex-grow flex-col gap-8 p-8 h-full max-lg:p-4">
+      <div className="pl-32 w-full max-lg:pl-0">
         <RecipesFilters />
-      </S.Top>
+      </div>
 
       {children}
 
-      <S.Bottom>
+      <div className="mt-auto flex justify-center">
         <Paginator />
-      </S.Bottom>
-    </S.Container>
+      </div>
+    </div>
   );
 }

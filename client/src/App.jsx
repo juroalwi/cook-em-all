@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 import Recipes from "./components/Recipes/Recipes.jsx";
 import RecipeDetail from "./components/RecipeDetail/RecipeDetail.jsx";
 import CreateRecipeSmart from "./components/CreateRecipe/CreateRecipeSmart.jsx";
-import { GlobalStyle } from "./components/GlobalStyle.styled.js";
+
 import useScreenSize from "./hooks/useScreenSize.js";
 import useDiets from "./hooks/useDiets.js";
 import useRecipes from "./hooks/useRecipes.js";
@@ -22,23 +22,12 @@ export default function App() {
 
   return (
     <div
-      style={
+      className={
         isMobile
-          ? {
-              minHeight: "100vh",
-              maxWidth: "480px",
-              minWidth: "300px",
-              marginRight: "auto",
-              marginLeft: "auto",
-            }
-          : {
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "100vh",
-            }
+          ? "mx-auto max-w-120 min-w-[280px]"
+          : "flex min-h-screen flex-col"
       }
     >
-      <GlobalStyle />
       <NavBar />
       <Routes>
         <Route path="/recipe/detail/:id" element={<RecipeDetail />} />

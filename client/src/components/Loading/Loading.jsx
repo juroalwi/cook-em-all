@@ -1,10 +1,14 @@
-import React from 'react';
-import * as S from './Loading.styled.js'
+import React from "react";
 
 export default function Loading() {
   return (
-    <S.Loading> 
-      { [0,1,2,3,4].map(i => <S.Dot i={ i } key={ i }/>) }
-    </S.Loading>
-  )
+    <div className="h-[90.4vh] flex justify-center items-center bg-black">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <div
+          key={i}
+          className={`w-20 h-20 inline-block rounded-full bg-custom-white loading-dot loading-dot-${i}`}
+        />
+      ))}
+    </div>
+  );
 }

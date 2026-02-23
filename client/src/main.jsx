@@ -6,6 +6,7 @@ import axios from "axios";
 import store from "./redux/store.js";
 import App from "./App.jsx";
 import ScreenSizeProvider from "./providers/ScreenSizeProvider.jsx";
+import "./index.css";
 
 axios.defaults.baseURL =
   import.meta.env.VITE_API_URL || "http://localhost:3000/api";

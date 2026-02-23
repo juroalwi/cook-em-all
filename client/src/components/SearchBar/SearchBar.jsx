@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "./SearchBar.styled.js";
+
 import useRecipes from "../../hooks/useRecipes.js";
 
 export default function SearchBar() {
@@ -21,13 +21,14 @@ export default function SearchBar() {
   }, [query]);
 
   return (
-    <S.Query
+    <input
       type="text"
       name="query"
       autoComplete="off"
       placeholder="Search recipe..."
       onChange={handleChange}
       value={query}
+      className="py-3.75! px-7.5! w-full max-w-150 bg-custom-white text-custom-black text-base"
     />
   );
 }
