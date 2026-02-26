@@ -1,7 +1,7 @@
-const { Op } = require("sequelize");
-const { Recipe, Diet } = require("../../db.js").models;
+import { Op } from "@sequelize/core";
+import { recipeModel, dietModel } from "../../db.js";
 
-module.exports = async function postRecipe(req, res, next) {
+export const postRecipe = async (req, res, next) => {
   const {
     title,
     image,

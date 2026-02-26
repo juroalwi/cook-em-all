@@ -1,12 +1,7 @@
-require("dotenv").config();
-const { API_KEY } = process.env;
+import axios from "axios";
+import { recipeModel, dietModel } from "../../db.js";
 
-// ----
-const axios = require("axios").default;
-const { Recipe, Diet } = require("../../db.js").models;
-
-// ----
-module.exports = async function getRecipeDetail(req, res, next) {
+export const getRecipeDetail = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id.replace("EXTERNAL_", ""), 10);
 

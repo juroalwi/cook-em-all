@@ -1,13 +1,12 @@
-const express = require("express");
-const getRecipes = require("./getRecipes.js");
-const getRecipeDetail = require("./getRecipeDetail.js");
-const postRecipe = require("./postRecipe.js");
+import express from "express";
+import { getRecipes } from "./getRecipes.js";
+import { getRecipeDetail } from "./getRecipeDetail.js";
+import { postRecipe } from "./postRecipe.js";
 
-// ----
-const router = express.Router();
+const recipesRouter = express.Router();
 
-router.get("/", getRecipes);
-router.get("/detail/:id", getRecipeDetail);
-router.post("/create", postRecipe);
+recipesRouter.get("/", getRecipes);
+recipesRouter.get("/detail/:id", getRecipeDetail);
+recipesRouter.post("/create", postRecipe);
 
-module.exports = router;
+export { recipesRouter };

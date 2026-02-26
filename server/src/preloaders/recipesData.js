@@ -1,4 +1,4 @@
-module.exports = [
+export const recipesData = [
   {
     id: "EXTERNAL_715497",
     title: "Berry Banana Breakfast Smoothie",

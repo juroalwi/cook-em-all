@@ -1,11 +1,10 @@
-require("dotenv").config();
-const app = require("./app.js");
-const db = require("./db.js");
-const dietsLoader = require("./preloaders/dietsLoader.js");
-const recipesLoader = require("./preloaders/recipesLoader.js");
+import "dotenv/config";
+import sequelize from "./db.js";
+import { app } from "./app.js";
+import { dietsLoader } from "./preloaders/dietsLoader.js";
+import { recipesLoader } from "./preloaders/recipesLoader.js";
 
-// Syncing all the models at once.
-db.sync({ force: true }).then(async () => {
+sequelize.sync({ force: true }).then(async () => {
   console.log("Data base created.");
   await Promise.all(dietsLoader());
   console.log("Diets loaded.");

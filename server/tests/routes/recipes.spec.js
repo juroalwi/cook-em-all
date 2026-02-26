@@ -1,5 +1,5 @@
-const session = require("supertest-session");
-const app = require("../../src/app.js");
+import session from "supertest-session";
+import app from "../../src/app.js";
 
 const agent = session(app);
 

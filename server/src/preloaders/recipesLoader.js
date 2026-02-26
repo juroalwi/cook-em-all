@@ -1,9 +1,9 @@
-const { Op } = require("sequelize");
-const db = require("../db.js");
-const recipes = require("./recipesData");
+import { Op } from "@sequelize/core";
+import { recipeModel, dietModel } from "../db.js";
+import { recipesData } from "./recipesData.js";
 
-module.exports = function recipesLoader() {
-  return recipes.map((recipe) => {
+export const recipesLoader = () => {
+  return recipesData.map(async (recipe) => {
     const {
       title,
       image,

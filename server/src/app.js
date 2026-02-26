@@ -1,39 +1,32 @@
-const express = require("express");
-const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const path = require("path");
+import express from "express";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import { recipesRouter } from "./routes/recipes/index.js";
+import { dietsRouter } from "./routes/diets/index.js";
 
-// Middlewares.
 const app = express();
-app.name = "SERVER";
+
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // Update to match the domain you will make the request from.
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept",
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-
-// Routes middleware.
-const recipes = require("./routes/recipes");
-const diets = require("./routes/diets");
-app.use("/api/recipes", recipes);
-app.use("/api/diets", diets);
-
-// Error catching endware.
-app.use((error, req, res, next) => {
+app.use("/recipes", recipesRouter);
+app.use("/diets", dietsRouter);
+app.use((error, _req, res, _next) => {
   const status = error.status || 500;
   const message = error.message || error;
-  console.error(error);
   res.status(status).send(message);
 });
 
@@ -46,5 +39,4 @@ app.use(express.static(clientDistPath));
 app.get("*", (req, res) => {
   res.sendFile(path.join(clientDistPath, "index.html"));
 });
-
-module.exports = app;
+export { app };

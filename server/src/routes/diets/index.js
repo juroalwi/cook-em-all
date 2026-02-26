@@ -1,10 +1,9 @@
-const express = require("express");
-const { Diet } = require("../../db.js").models;
+import { Router } from "express";
+import { dietModel } from "../../db.js";
 
-// ----
-const router = express.Router();
+const dietsRouter = Router();
 
-router.get("/", async (req, res, next) => {
+dietsRouter.get("/", async (_req, res, next) => {
   try {
     const response = await Diet.findAll();
     const diets = response.map((diet) => diet.dataValues.name);
@@ -14,4 +13,4 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export { dietsRouter };

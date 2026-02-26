@@ -1,6 +1,6 @@
-const db = require("../db.js");
-const diets = require("./dietsData");
+import { dietModel } from "../db.js";
+import { dietsData } from "./dietsData.js";
 
-module.exports = function dietsLoader() {
-  return diets.map((diet) => db.models.Diet.create({ name: diet }));
+export const dietsLoader = () => {
+  return dietsData.map(async (diet) => {
 };

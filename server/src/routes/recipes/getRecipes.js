@@ -1,15 +1,8 @@
-require("dotenv").config();
-const { API_KEY } = process.env;
+import axios from "axios";
+import { Op } from "@sequelize/core";
+import { recipeModel, dietModel } from "../../db.js";
 
-// ----
-const axios = require("axios").default;
-const { Op } = require("sequelize");
-const { Recipe, Diet } = require("../../db.js").models;
-
-// ----
-module.exports = async function getRecipes(req, res, next) {
-  const query = req.query.title && req.query.title.toLowerCase();
-  const defaultRecipes = req.query.defaultRecipes;
+export const getRecipes = async (req, res, next) => {
 
   try {
     if (defaultRecipes === "true") {

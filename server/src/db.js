@@ -1,4 +1,6 @@
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DATABASE_URL } = process.env;
+import { Sequelize } from "@sequelize/core";
+import { recipeModelCreator } from "./models/recipeModelCreator.js";
+import { dietModelCreator } from "./models/dietModelCreator.js";
 
 // Initialize data base.
 const { Sequelize } = require("sequelize");
@@ -45,4 +47,6 @@ Diet.belongsToMany(Recipe, {
   foreignKey: "dietId",
 });
 
-module.exports = sequelize;
+export { recipeModel, dietModel };
+
+export default sequelize;
