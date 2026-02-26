@@ -30,13 +30,4 @@ app.use((error, _req, res, _next) => {
   res.status(status).send(message);
 });
 
-const clientDistPath = path.resolve(__dirname, "../client/dist");
-
-// Static frontend.
-app.use(express.static(clientDistPath));
-
-// React fallback.
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientDistPath, "index.html"));
-});
 export { app };
