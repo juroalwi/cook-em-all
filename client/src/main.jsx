@@ -9,7 +9,7 @@ import ScreenSizeProvider from "./providers/ScreenSizeProvider.jsx";
 import "./index.css";
 
 axios.defaults.baseURL =
-  import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+  import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
