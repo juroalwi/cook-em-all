@@ -2,11 +2,10 @@ import { Sequelize } from "@sequelize/core";
 import { recipeModelCreator } from "./models/recipeModelCreator.js";
 import { dietModelCreator } from "./models/dietModelCreator.js";
 
-// Initialize data base.
-const { Sequelize } = require("sequelize");
 const sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize(DATABASE_URL, {
+  process.env.NODE_ENV === "prod"
+    ? new Sequelize({
+        url: process.env.DB_URL,
         dialect: "postgres",
         dialectOptions: {
           pool: {
@@ -19,32 +18,29 @@ const sequelize =
         ssl: true,
         define: { timestamps: false },
       })
-    : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-        {
-          logging: false,
-          native: false,
-          define: { timestamps: false },
-        }
-      );
+    : new Sequelize({
+        url: process.env.DB_URL,
+        dialect: "postgres",
+        native: false,
+        define: { timestamps: false },
+      });
 
-// Connect models to sequelize.
-const RecipeModelCreator = require("./models/Recipe.js");
-const DietModelCreator = require("./models/Diet");
-RecipeModelCreator(sequelize);
-DietModelCreator(sequelize);
+recipeModelCreator(sequelize);
+dietModelCreator(sequelize);
 
-// Associations.
-const { Recipe, Diet } = sequelize.models;
-Recipe.belongsToMany(Diet, {
-  as: "diets",
-  through: "RecipesDiets",
-  foreignKey: "recipeId",
+const recipeModel = sequelize.models.get("recipe");
+const dietModel = sequelize.models.get("diet");
+
+recipeModel.belongsToMany(dietModel, {
+  through: "recipes_diets",
+  foreignKey: { name: "recipe_id" },
+  otherKey: { name: "diet_id" },
 });
-Diet.belongsToMany(Recipe, {
-  as: "recipes",
-  through: "RecipesDiets",
-  foreignKey: "dietId",
+
+dietModel.belongsToMany(recipeModel, {
+  through: "recipes_diets",
+  foreignKey: { name: "diet_id" },
+  otherKey: { name: "recipe_id" },
 });
 
 export { recipeModel, dietModel };
