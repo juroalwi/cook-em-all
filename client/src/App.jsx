@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import Recipes from "./components/Recipes/Recipes.jsx";
 import RecipeDetail from "./components/RecipeDetail/RecipeDetail.jsx";
-import CreateRecipeSmart from "./components/CreateRecipe/CreateRecipeSmart.jsx";
+import CreateRecipe from "./components/CreateRecipe/CreateRecipe.jsx";
 
 import useScreenSize from "./hooks/useScreenSize.js";
 import useDiets from "./hooks/useDiets.js";
@@ -24,14 +24,14 @@ export default function App() {
     <div
       className={
         isMobile
-          ? "mx-auto max-w-120 min-w-[280px]"
+          ? "mx-auto max-w-120 min-w-70"
           : "flex min-h-screen flex-col"
       }
     >
       <NavBar />
       <Routes>
         <Route path="/recipe/detail/:id" element={<RecipeDetail />} />
-        <Route path="/recipe/create" element={<CreateRecipeSmart />} />
+        <Route path="/recipe/create" element={<CreateRecipe />} />
         <Route path="/*" element={<Recipes />} index={true} />
       </Routes>
     </div>
