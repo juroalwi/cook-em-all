@@ -5,7 +5,7 @@ const dietsRouter = Router();
 
 dietsRouter.get("/", async (_req, res, next) => {
   try {
-    const response = await Diet.findAll();
+    const response = await dietModel.findAll();
     const diets = response.map((diet) => diet.dataValues.name);
     res.send(diets);
   } catch (error) {

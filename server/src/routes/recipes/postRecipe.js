@@ -4,7 +4,6 @@ import { recipeModel, dietModel } from "../../db.js";
 export const postRecipe = async (req, res, next) => {
   const {
     title,
-    image,
     diets = [],
     summary,
     score,
@@ -14,25 +13,24 @@ export const postRecipe = async (req, res, next) => {
 
   if (
     !title ||
-    !summary ||
-    typeof Number(score) !== "number" ||
-    typeof Number(healthScore) !== "number" ||
+    Number.isNaN(Number(score)) ||
+    Number.isNaN(Number(healthScore)) ||
     !Array.isArray(diets) ||
     !Array.isArray(instructions)
-  )
-    return res.status(400).send("Invalid values.");
+  ) {
+    return res.status(400).send("Invalid values provided.");
+  }
 
   try {
-    const newRecipePromise = Recipe.create({
+    const newRecipePromise = recipeModel.create({
       title,
-      image,
       summary,
       score: Number(score),
-      healthScore: Number(healthScore),
+      health_score: Number(healthScore),
       instructions,
     });
 
-    const matchedDietsPromise = Diet.findAll({
+    const matchedDietsPromise = dietModel.findAll({
       where: {
         name: {
           [Op.in]: diets,

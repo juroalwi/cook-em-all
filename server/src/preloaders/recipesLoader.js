@@ -5,6 +5,7 @@ import { recipesData } from "./recipesData.js";
 export const recipesLoader = () => {
   return recipesData.map(async (recipe) => {
     const {
+      id,
       title,
       image,
       diets = [],
@@ -13,36 +14,35 @@ export const recipesLoader = () => {
       healthScore,
       instructions = [],
     } = recipe;
-    return new Promise(async (resolve, reject) => {
-      try {
-        const newRecipePromise = db.models.Recipe.create({
-          title,
-          image,
-          summary: summary.replace(/<[^>]*>?/g, ""),
-          score: Number(score),
-          healthScore: Number(healthScore),
-          instructions,
-        });
 
-        const matchedDietsPromise = db.models.Diet.findAll({
-          where: {
-            name: {
-              [Op.in]: diets,
-            },
+    try {
+      const newRecipePromise = recipeModel.create({
+        id,
+        title,
+        image,
+        summary: summary.replace(/<[^>]*>?/g, ""),
+        score: Number(score),
+        health_score: Number(healthScore),
+        instructions,
+      });
+
+      const matchedDietsPromise = dietModel.findAll({
+        where: {
+          name: {
+            [Op.in]: diets,
           },
-        });
+        },
+      });
 
-        const [newRecipe, matchedDiets] = await Promise.all([
-          newRecipePromise,
-          matchedDietsPromise,
-        ]);
+      const [newRecipe, matchedDiets] = await Promise.all([
+        newRecipePromise,
+        matchedDietsPromise,
+      ]);
 
-        newRecipe.setDiets(matchedDiets);
-
-        resolve([newRecipe, matchedDiets]);
-      } catch (error) {
-        reject(error);
-      }
-    });
+      newRecipe.setDiets(matchedDiets);
+    } catch (error) {
+      console.error(`Failed to preload recipes: ${error}`);
+      throw error;
+    }
   });
 };
