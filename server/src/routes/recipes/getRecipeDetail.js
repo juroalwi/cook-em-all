@@ -2,17 +2,17 @@ import axios from "axios";
 import { recipeModel, dietModel } from "../../db.js";
 
 export const getRecipeDetail = async (req, res, next) => {
+  const id = req.params.id;
+
+  if (!id) {
+    res.status(400).send("Invalid recipe ID provided.");
+  }
+
   try {
-    const id = req.params.id;
-
-    if (!id) {
-      res.status(400).send("Invalid recipe ID provided.");
-    }
-
     const internalRecipe = await getInternalRecipe(id);
 
     if (internalRecipe) {
-      return res.status(200).send(internalResult);
+      return res.status(200).send(internalRecipe);
     }
 
     if (!internalRecipe && id.includes("CREATED_")) {
