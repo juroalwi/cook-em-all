@@ -12,16 +12,6 @@ export default {
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
-      animation: {
-        "dot-expansion": "expansion 2s infinite",
-      },
-      keyframes: {
-        expansion: {
-          "0%": { transform: "scale(1)" },
-          "50%": { transform: "scale(1.2)" },
-          "100%": { transform: "scale(1)" },
-        },
-      },
     },
   },
   plugins: [],
