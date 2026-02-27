@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function Recipe(props) {
   const getStarRating = (score) => {
-    const percentage = score * 20;
     return (
       <div className="relative text-base">
         <span
           className="relative top-0.5 text-2xl bg-gradient-to-r bg-clip-text text-transparent"
           style={{
-            backgroundImage: `linear-gradient(90deg, #FBBD0D ${percentage}%, #2D2C2E ${percentage}%)`,
+            backgroundImage: `linear-gradient(90deg, #FBBD0D ${score}%, #2D2C2E ${score}%)`,
           }}
         >
           ★★★★★
