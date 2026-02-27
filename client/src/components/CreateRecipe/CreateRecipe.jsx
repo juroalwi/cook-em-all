@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import defaultRecipe from "../../media/recipe.svg";
 import useDiets from "../../hooks/useDiets";
 import { twMerge } from "tailwind-merge";
 import useScreenSize from "../../hooks/useScreenSize";
@@ -67,7 +66,6 @@ export default function CreateRecipe() {
           healthScore,
           instructions,
           diets,
-          image: defaultRecipe,
         },
       });
       navigate(`/recipe/detail/${result.data.id}`);
