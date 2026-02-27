@@ -1,26 +1,32 @@
 # <a href='https://jralvarezwindey-food-app.vercel.app'> Cook 'Em All </a>
 
-Website: https://jralvarezwindey-food-app.vercel.app
-
 ## About the project
 
-Single-page full-stack application that allows users to search recipes by name, filter and sort results, create new recipes, and view detailed information.
+A single-page full-stack application that enables users to search recipes by
+name, as well as filter and sort results. The platform also supports creating
+new recipes and viewing detailed information for each recipe.
 
-The application features a custom backend developed with Node.js, responsible for data handling and persistence, and a client-side interface that consumes this backend. When accessed through the public URL, data is served directly from the database.
+The application includes a custom backend built with Node.js, responsible for
+data processing, storage, and persistence. The client-side interface consumes
+this backend to deliver a seamless user experience.
 
-The frontend is built as a SPA, with all styles implemented using pure CSS.
+Recipe data is primarily fetched from  
+<a href='https://spoonacular.com/food-api'>Spoonacular</a>.
+To ensure reliability, the system implements a fallback mechanism that
+backfills and stores a set of default recipes in the local database, allowing
+continued functionality if the external API becomes unavailable.
 
 #### Recipes cards
 
-<img src='./media/main.jpg'/>
+<img src='/images/main.jpg'/>
 
 #### Recipe detail
 
-<img src='./media/recipe-detail.jpg'/>
+<img src='/images/recipe-detail.jpg'/>
 
 #### Create recipe
 
-<img src='./media/create-recipe.jpg'/>
+<img src='/images/create-recipe.jpg'/>
 
 ## Technologies used
 
@@ -29,30 +35,26 @@ The frontend is built as a SPA, with all styles implemented using pure CSS.
 - HTML
 - React
 - Redux
+- Tailwind
 - Node
 - Express
 - Sequelize
 - PostgreSQL
 
-## Getting started (localhost)
-
-In case that you want to run the application locally, here is how you can do it:
+## Run locally
 
 - Install PostgreSQL and create a data base.
-- Create an account at https://spoonacular.com and get your free api key.
+- Create an account at https://spoonacular.com and get your free api key (optional, handles data backfilling in case API is not available).
 - Clone repository in your computer.
 - Create an `.env` file in `/server` folder. It must contain the following:
 
 ```
-  API_KEY=<your_api_key>
-  DB_USER=<your_postgres_username>
-  DB_PASSWORD=<your_postgres_password>
-  DB_NAME=<your_postgres_database_name>
-  DB_HOST=localhost
+API_KEY=<your_api_key>
+DB_URL=postgres://<your_pg_username>:<your_pg_password>@localhost/<your_pg_db_name>
 ```
 
-- Install NodeJS (version >= 12.18.3) and npm (version >= 6.14.16).
-- Execute `npm i` on `/client` and on `/server` folders.
+- Install NodeJS (version >= 22.15.1) and npm (version >= 10.9.2).
+- Execute `npm install` on `/client` and on `/server` folders.
 - Execute `npm start` on `/client` folder to initialize backend.
 - Execute `npm start` on `/server` folder to initialize frontend.
 - Navigate to `http://localhost:5173` in your browser.
