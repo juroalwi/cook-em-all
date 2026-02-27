@@ -1,4 +1,4 @@
-# <a href='https://jralvarezwindey-food-app.vercel.app'> Cook 'Em All </a>
+# Cook 'Em All
 
 ## About the project
 
