@@ -28,7 +28,7 @@ export default function SearchBar() {
       placeholder="Search recipe..."
       onChange={handleChange}
       value={query}
-      className="py-3.75! px-7.5! w-full max-w-150 bg-custom-white text-custom-black text-base"
+      className="py-3.75! px-7.5! w-full max-w-150 bg-custom-white text-custom-black text-base rounded-xs"
     />
   );
 }

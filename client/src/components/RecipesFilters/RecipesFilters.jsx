@@ -42,13 +42,14 @@ export default function DisplayParameters() {
   return (
     <div className="text-custom-white flex items-center gap-16">
       <div className="group relative cursor-pointer">
-        <div className="light-shadow-small w-60 px-12 py-3 text-center text-xl font-medium transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none">
+        <div className="light-shadow-small w-60 px-12 py-3 text-center text-xl font-medium transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none rounded-xs">
           Sort by
           {recipesSortBy
             ? `: ${recipesSortBy === "az" ? "a-z" : recipesSortBy === "za" ? "z-a" : "score"}`
             : ""}
         </div>
-        <div className="absolute z-10 hidden w-full bg-black shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:block">
+
+        <div className="absolute z-10 hidden w-full bg-black shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:block rounded-xs">
           <p
             className={`hover:bg-custom-white hover:text-custom-black px-4 py-3 text-xl tracking-wide transition-colors duration-200 ${
               recipesSortBy === "az" ? "text-custom-red" : "text-custom-white"
@@ -82,7 +83,7 @@ export default function DisplayParameters() {
         <div className="w-60 px-12 py-3 text-center text-xl font-medium shadow-[1px_2px_8px_0px_rgba(45,45,45,1)] transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none">
           Filters ({recipesFilters.length})
         </div>
-        <div className="absolute z-10 hidden w-100 flex-wrap gap-2.5 bg-black p-4 shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:flex">
+        <div className="absolute z-10 hidden w-100 flex-wrap gap-2.5 bg-black p-4 shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:flex rounded-xs">
           {diets.map((diet, index) => {
             const active = recipesFilters.includes(diet);
             return (
@@ -121,7 +122,7 @@ function RecipesFiltersMobile({
       </button>
 
       {isOpen && (
-        <div className="light-shadow absolute top-full z-10 mt-[20%] flex w-[90%] flex-col gap-2 bg-black p-4">
+        <div className="light-shadow absolute top-full z-10 flex w-[90%] flex-col gap-2 bg-black p-4 rounded-xs">
           <div className="text-lg font-semibold">Sort by</div>
 
           <div className="flex cursor-pointer gap-4 p-2">

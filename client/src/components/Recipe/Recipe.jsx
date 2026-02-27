@@ -18,7 +18,7 @@ export default function Recipe(props) {
   };
 
   return (
-    <div className="relative w-full max-w-[400px] h-[500px] flex flex-col justify-between bg-custom-white max-[360px]:h-[440px]">
+    <div className="relative w-full max-w-[400px] h-[500px] flex flex-col justify-between bg-custom-white max-[360px]:h-[440px] rounded-sm overflow-hidden">
       <img
         src={props.image}
         alt="recipe"
@@ -48,8 +48,8 @@ export default function Recipe(props) {
       </div>
 
       <Link to={`/recipe/detail/${props.id}`}>
-        <button className="h-[55px] w-full flex justify-center items-center bg-custom-red text-custom-white text-xl tracking-wider transition-colors duration-200 hover:bg-custom-yellow">
-          DETAIL
+        <button className="h-[55px] w-full flex justify-center items-center bg-custom-red text-custom-white text-xl tracking-wider transition-colors duration-200 hover:bg-custom-yellow cursor-pointer uppercase">
+          detail
         </button>
       </Link>
     </div>
