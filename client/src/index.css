@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
 
 @theme {
   --font-montserrat: Montserrat, sans-serif;
@@ -7,7 +7,6 @@
   --color-custom-white: #faf0e0;
   --color-custom-red: #ff2b55;
   --color-custom-yellow: #fbbd0d;
-  --animate-dot-expansion: expansion 2s infinite;
 }
 
 * {
@@ -24,18 +23,10 @@ body {
   background-color: black;
 }
 
-button {
-  outline: none;
-}
-
+button,
 input,
 textarea {
   outline: none;
-}
-
-::placeholder {
-  color: black;
-  opacity: 0.6;
 }
 
 /* Loading animation for dots */
@@ -96,41 +87,39 @@ textarea {
   animation-delay: -0.5s;
 }
 
-.light-shadow {
+@utility light-shadow {
   box-shadow: 2px 4px 16px 0px rgba(45, 45, 45, 1);
 }
 
-.light-shadow-small {
+@utility light-shadow-small {
   box-shadow: 1px 2px 8px 0px rgba(45, 45, 45, 1);
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 9px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--color-custom-white);
-  border-radius: 10px;
-}
-
-.custom-scrollbar-dark::-webkit-scrollbar {
-  width: 9px;
-}
-
-.custom-scrollbar-dark::-webkit-scrollbar-thumb {
-  background-color: var(--color-custom-black);
-  border-radius: 10px;
-}
-
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-custom-white);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar-dark::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  .custom-scrollbar-dark::-webkit-scrollbar-thumb {
+    background-color: var(--color-custom-black);
+    border-radius: 10px;
   }
 }
