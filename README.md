@@ -44,7 +44,7 @@ continued functionality if the external API becomes unavailable.
 ## Run locally
 
 - Install PostgreSQL and create a data base.
-- Create an account at https://spoonacular.com and get your free api key (optional, handles data backfilling in case API is not available).
+- Create an account at https://spoonacular.com and get your free API key (this is optional, the backend handles data backfilling in case API is not available).
 - Clone repository in your computer.
 - Create an `.env` file in `/server` folder. It must contain the following:
 
