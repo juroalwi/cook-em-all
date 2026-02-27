@@ -2,6 +2,7 @@ import useScreenSize from "../../hooks/useScreenSize.js";
 import RightArrowIcon from "../../media/icons/RightArrowIcon.jsx";
 import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
 import useRecipes from "../../hooks/useRecipes.js";
+import { twMerge } from "tailwind-merge";
 
 export default function Paginator() {
   const { isMobile } = useScreenSize();
@@ -16,18 +17,20 @@ export default function Paginator() {
   if (isMobile) {
     return (
       <div className="flex items-center gap-8">
-        {recipesPage > 0 && (
+        {recipesPage > 1 && (
           <LeftArrowIcon
             fill="#FAF0E0"
+            className="cursor-pointer"
             onClick={() => handlePageChange(recipesPage - 1)}
           />
         )}
-        <div className="text-2xl font-semibold text-custom-white">
-          {recipesPage + 1}
+        <div className="text-custom-white text-2xl font-semibold">
+          {recipesPage}
         </div>
         {recipesPage < recipesMaxPage && (
           <RightArrowIcon
             fill="#FAF0E0"
+            className="cursor-pointer"
             onClick={() => handlePageChange(recipesPage + 1)}
           />
         )}
@@ -43,9 +46,10 @@ export default function Paginator() {
           return (
             <button
               key={page}
-              className={`h-14 w-14 text-xl font-semibold bg-transparent text-custom-white transition-colors duration-300 hover:bg-gray-800 ${
-                isSelected ? "bg-custom-red" : ""
-              }`}
+              className={twMerge(
+                "text-custom-white hover:bg-custom-black h-14 w-14 bg-transparent text-xl font-semibold transition-colors duration-300 cursor-pointer rounded-xs",
+                isSelected && "bg-custom-red hover:bg-custom-red",
+              )}
               onClick={() => handlePageChange(page)}
             >
               {page}
