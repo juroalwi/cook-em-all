@@ -10,7 +10,7 @@ import useScreenSize from "./hooks/useScreenSize.js";
 import useDiets from "./hooks/useDiets.js";
 import useRecipes from "./hooks/useRecipes.js";
 
-export default function App() {
+export const App = () => {
   const { fetchDiets } = useDiets();
   const { fetchRecipes } = useRecipes();
   const { isMobile } = useScreenSize();

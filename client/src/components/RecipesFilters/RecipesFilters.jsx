@@ -4,28 +4,28 @@ import useScreenSize from "../../hooks/useScreenSize.js";
 import FiltersIcon from "../../media/icons/FiltersIcon.jsx";
 import { useState } from "react";
 
-export default function DisplayParameters() {
+export const RecipesFilters = () => {
   const { isMobile } = useScreenSize();
   const { diets } = useDiets();
   const { setRecipesFilters, setRecipesSortBy, recipesFilters, recipesSortBy } =
     useRecipes();
 
-  function handleFiltersUpdate(filter) {
+  const handleFiltersUpdate = (filter) => {
     const index = recipesFilters.indexOf(filter);
     setRecipesFilters(
       index !== -1
         ? recipesFilters.filter((selectedFilter) => selectedFilter !== filter)
         : [...recipesFilters, filter],
     );
-  }
+  };
 
-  function handleSortByUpdate(sortBy) {
+  const handleSortByUpdate = (sortBy) => {
     if (sortBy === recipesSortBy) {
       setRecipesSortBy(null);
     } else {
       setRecipesSortBy(sortBy);
     }
-  }
+  };
 
   if (isMobile) {
     return (
@@ -102,15 +102,15 @@ export default function DisplayParameters() {
       </div>
     </div>
   );
-}
+};
 
-function RecipesFiltersMobile({
+const RecipesFiltersMobile = ({
   diets,
   recipesSortBy,
   recipesFilters,
   handleSortByUpdate,
   handleFiltersUpdate,
-}) {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="text-custom-white relative flex justify-end">

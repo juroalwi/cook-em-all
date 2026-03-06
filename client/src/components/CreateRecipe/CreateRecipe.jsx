@@ -5,7 +5,7 @@ import useDiets from "../../hooks/useDiets";
 import { twMerge } from "tailwind-merge";
 import useScreenSize from "../../hooks/useScreenSize";
 
-function validate(field, value) {
+const validate = (field, value) => {
   switch (field) {
     case "title":
       if (!value) return "Title is required";
@@ -15,23 +15,25 @@ function validate(field, value) {
       if (!value) return "Summary is required";
       if (/^\s*$/.test(value)) return "Invalid summary";
       break;
-    case "score":
+    case "score": {
       const scoreRegex = /^0*([0-5](\.[0-9]*)?$)/;
       if (!value) return "Score is required";
       if (!scoreRegex.test(value)) return "Score must be between 0 and 5";
       break;
-    case "healthScore":
+    }
+    case "healthScore": {
       const healthScoreRegex = /^0*(([0-9][0-9]?)|(100))(\.[0-9]*)?$/;
       if (!value) return "Health score is required";
       if (!healthScoreRegex.test(value) && value !== "")
         return "Health score must be between 0 and 100";
       break;
+    }
     default:
       return "";
   }
-}
+};
 
-export default function CreateRecipe() {
+export const CreateRecipe = () => {
   const navigate = useNavigate();
   const { isMobile } = useScreenSize();
   const { diets } = useDiets();
@@ -51,7 +53,7 @@ export default function CreateRecipe() {
     diets: [],
   });
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { title, summary, score, healthScore, instructions, diets } = values;
     try {
@@ -72,10 +74,10 @@ export default function CreateRecipe() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  function handleChange(event) {
-    setValues((d) => ({
+  const handleChange = (event) => {
+    setValues(() => ({
       ...values,
       [event.target.name]: event.target.value,
     }));
@@ -83,26 +85,26 @@ export default function CreateRecipe() {
       ...e,
       [event.target.name]: validate(event.target.name, event.target.value),
     }));
-  }
+  };
 
-  function handleAddInstruction(event) {
+  const handleAddInstruction = () => {
     setValues({
       ...values,
       instruction: "",
       instructions: [...values.instructions, values.instruction],
     });
-  }
+  };
 
-  function handleRemoveInstruction(removedIndex) {
+  const handleRemoveInstruction = (removedIndex) => {
     setValues({
       ...values,
       instructions: values.instructions.filter(
         (_instruction, index) => index !== removedIndex,
       ),
     });
-  }
+  };
 
-  function handleToggleDiet(diet) {
+  const handleToggleDiet = (diet) => {
     const index = values.diets.indexOf(diet);
     setValues({
       ...values,
@@ -111,7 +113,7 @@ export default function CreateRecipe() {
           ? values.diets.filter((selectedDiet) => selectedDiet !== diet)
           : [...values.diets, diet],
     });
-  }
+  };
 
   return (
     <div
@@ -247,9 +249,9 @@ export default function CreateRecipe() {
       </div>
     </div>
   );
-}
+};
 
-function Label({ children, className }) {
+const Label = ({ children, className }) => {
   return (
     <label
       className={twMerge(
@@ -260,9 +262,9 @@ function Label({ children, className }) {
       {children}:
     </label>
   );
-}
+};
 
-function Input({ name, value, onChange, className }) {
+const Input = ({ name, value, onChange, className }) => {
   return (
     <input
       name={name}
@@ -277,7 +279,7 @@ function Input({ name, value, onChange, className }) {
   );
 }
 
-function TextArea({ name, value, onChange, className }) {
+const TextArea = ({ name, value, onChange, className }) => {
   return (
     <textarea
       name={name}
@@ -289,9 +291,9 @@ function TextArea({ name, value, onChange, className }) {
       )}
     />
   );
-}
+};
 
-function Error({ message }) {
+const Error = ({ message }) => {
   return (
     <div
       className={twMerge(
@@ -340,9 +342,9 @@ function StarRating({ value, onChange }) {
       <span className="text-custom-white ml-2 text-sm">({value}/5)</span>
     </div>
   );
-}
+};
 
-function SmallButton({ onClick, disabled, className, children }) {
+const SmallButton = ({ onClick, disabled, className, children }) => {
   return (
     <button
       onClick={onClick}

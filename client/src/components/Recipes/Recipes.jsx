@@ -8,7 +8,7 @@ import Loading from "../Loading/Loading.jsx";
 import RecipesNotFound from "../RecipesNotFound/RecipesNotFound.jsx";
 import { fetchStatus } from "../../utils/constants.js";
 
-export default function Recipes() {
+export const Recipes = () => {
   const { displayedRecipes, recipesStatus, setRecipesFilters, fetchRecipes } =
     useRecipes();
   const { dietsStatus } = useDiets();
@@ -53,7 +53,7 @@ export default function Recipes() {
   );
 }
 
-function Wrapper({ children }) {
+const Wrapper = ({ children }) => {
   return (
     <div className="flex flex-grow flex-col gap-8 p-8 h-full max-lg:p-4">
       <div className="pl-32 w-full max-lg:pl-0">

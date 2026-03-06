@@ -1,4 +1,4 @@
-export default function LeftArrowIcon(props) {
+export const LeftArrowIcon = (props) => {
   return (
     <svg
       fill="#000000"

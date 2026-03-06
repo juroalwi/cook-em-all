@@ -4,13 +4,13 @@ import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
 import useRecipes from "../../hooks/useRecipes.js";
 import { twMerge } from "tailwind-merge";
 
-export default function Paginator() {
+export const Paginator = () => {
   const { isMobile } = useScreenSize();
   const { setRecipesPage, recipesPage, recipesMaxPage } = useRecipes();
 
-  function handlePageChange(newPage) {
+  const handlePageChange = (newPage) => {
     setRecipesPage(newPage);
-  }
+  };
 
   const pages = [...Array(recipesMaxPage).keys()].map((i) => i + 1);
 

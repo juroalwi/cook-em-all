@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import ScreenSizeProvider from "../../providers/ScreenSizeProvider.jsx";
 
-export default function NavBar() {
+export const NavBar = () => {
   const navigate = useNavigate();
 
-  function handleLogoClick() {
+  const handleLogoClick = () => {
     navigate("/");
-  }
+  };
 
   return (
     <ScreenSizeProvider>

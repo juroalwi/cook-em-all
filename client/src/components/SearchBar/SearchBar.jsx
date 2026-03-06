@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import useRecipes from "../../hooks/useRecipes.js";
 
-export default function SearchBar() {
+export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const { fetchRecipes } = useRecipes();
   const navigate = useNavigate();
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     setQuery(event.target.value);
-  }
+  };
 
   useEffect(() => {
     const id = setTimeout(() => {

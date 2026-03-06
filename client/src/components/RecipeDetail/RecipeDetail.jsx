@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Loading/Loading.jsx";
 
-export default function RecipeDetail() {
+export const RecipeDetail = () => {
   const defaultRecipesNumber = 100;
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function RecipeDetail() {
   });
 
   useEffect(() => {
-    (async function () {
+    (async () => {
       try {
         const response = await axios.get(`/recipes/detail/${id}`);
         setDetails({

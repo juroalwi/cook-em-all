@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function RecipesNotFound({ onReset }) {
+export const RecipesNotFound = ({ onReset }) => {
   return (
     <div className="max-w-[420px] p-12 px-10 mt-20 mx-auto flex flex-col items-center text-center gap-[18px] bg-custom-white/[0.06] border border-custom-white/[0.1] rounded-md">
       <div className="w-18 h-18 rounded-full border border-custom-white/[0.2] bg-black/40 text-[44px] leading-[1.6] text-custom-white flex items-center justify-center">

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Recipe(props) {
+export const Recipe = (props) => {
   const getStarRating = (score) => {
     return (
       <div className="relative text-base">

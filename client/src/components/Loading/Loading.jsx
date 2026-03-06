@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loading() {
+export const Loading = () => {
   return (
     <div className="h-[90.4vh] flex justify-center items-center bg-black">
       {[0, 1, 2, 3, 4].map((i) => (

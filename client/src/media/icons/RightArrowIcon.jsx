@@ -1,4 +1,4 @@
-export default function RightArrowIcon(props) {
+export const RightArrowIcon = (props) => {
   return (
     <svg
       fill="#000000"

@@ -1,4 +1,4 @@
-export default function FiltersIcon(props) {
+export const FiltersIcon = (props) => {
   return (
     <svg
       width="24px"
