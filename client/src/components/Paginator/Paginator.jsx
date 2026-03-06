@@ -3,6 +3,10 @@ import RightArrowIcon from "../../media/icons/RightArrowIcon.jsx";
 import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
 import useRecipes from "../../hooks/useRecipes.js";
 import { twMerge } from "tailwind-merge";
+import { useScreenSize } from "../../hooks/useScreenSize.js";
+import { RightArrowIcon } from "../../media/icons/RightArrowIcon.jsx";
+import { LeftArrowIcon } from "../../media/icons/LeftArrowIcon.jsx";
+import { useRecipes } from "../../hooks/useRecipes.js";
 
 export const Paginator = () => {
   const { isMobile } = useScreenSize();

@@ -1,11 +1,10 @@
-import React from "react";
-import Recipe from "../Recipe/Recipe.jsx";
-import useRecipes from "../../hooks/useRecipes.js";
-import useDiets from "../../hooks/useDiets.js";
-import RecipesFilters from "../RecipesFilters/RecipesFilters.jsx";
-import Paginator from "../Paginator/Paginator.jsx";
-import Loading from "../Loading/Loading.jsx";
-import RecipesNotFound from "../RecipesNotFound/RecipesNotFound.jsx";
+import { Recipe } from "../Recipe/Recipe.jsx";
+import { useRecipes } from "../../hooks/useRecipes.js";
+import { useDiets } from "../../hooks/useDiets.js";
+import { RecipesFilters } from "../RecipesFilters/RecipesFilters.jsx";
+import { Paginator } from "../Paginator/Paginator.jsx";
+import { Loading } from "../Loading/Loading.jsx";
+import { RecipesNotFound } from "../RecipesNotFound/RecipesNotFound.jsx";
 import { fetchStatus } from "../../utils/constants.js";
 
 export const Recipes = () => {

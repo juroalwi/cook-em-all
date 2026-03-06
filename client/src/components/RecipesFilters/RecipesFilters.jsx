@@ -3,6 +3,10 @@ import useDiets from "../../hooks/useDiets.js";
 import useScreenSize from "../../hooks/useScreenSize.js";
 import FiltersIcon from "../../media/icons/FiltersIcon.jsx";
 import { useState } from "react";
+import { useRecipes } from "../../hooks/useRecipes.js";
+import { useDiets } from "../../hooks/useDiets.js";
+import { useScreenSize } from "../../hooks/useScreenSize.js";
+import { FiltersIcon } from "../../media/icons/FiltersIcon.jsx";
 
 export const RecipesFilters = () => {
   const { isMobile } = useScreenSize();

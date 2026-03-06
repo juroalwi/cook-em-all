@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import useRecipes from "../../hooks/useRecipes.js";
+import { useRecipes } from "../../hooks/useRecipes.js";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");

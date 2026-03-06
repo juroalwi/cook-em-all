@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Loading from "../Loading/Loading.jsx";
+import { useParams } from "react-router-dom";
+import { Loading } from "../Loading/Loading.jsx";
 
 export const RecipeDetail = () => {
   const defaultRecipesNumber = 100;

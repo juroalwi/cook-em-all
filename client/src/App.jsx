@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar.jsx";
-import Recipes from "./components/Recipes/Recipes.jsx";
-import RecipeDetail from "./components/RecipeDetail/RecipeDetail.jsx";
-import CreateRecipe from "./components/CreateRecipe/CreateRecipe.jsx";
+import { NavBar } from "./components/NavBar/NavBar.jsx";
+import { Recipes } from "./components/Recipes/Recipes.jsx";
+import { RecipeDetail } from "./components/RecipeDetail/RecipeDetail.jsx";
+import { CreateRecipe } from "./components/CreateRecipe/CreateRecipe.jsx";
 
-import useScreenSize from "./hooks/useScreenSize.js";
-import useDiets from "./hooks/useDiets.js";
-import useRecipes from "./hooks/useRecipes.js";
+import { useScreenSize } from "./hooks/useScreenSize.js";
+import { useDiets } from "./hooks/useDiets.js";
+import { useRecipes } from "./hooks/useRecipes.js";
 
 export const App = () => {
   const { fetchDiets } = useDiets();

@@ -1,11 +1,10 @@
-import React from "react";
+import axios from "axios";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import axios from "axios";
-import store from "./redux/store.js";
-import App from "./App.jsx";
-import ScreenSizeProvider from "./providers/ScreenSizeProvider.jsx";
+import { store } from "./redux/store.js";
+import { App } from "./App.jsx";
+import { ScreenSizeProvider } from "./providers/ScreenSizeProvider.jsx";
 import "./index.css";
 
 axios.defaults.baseURL =

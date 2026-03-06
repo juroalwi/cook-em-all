@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDiets as fetchDietsAction } from "../redux/actions";
 
-export default function useDiets() {
+export const useDiets = () => {
   const dispatch = useDispatch();
   const diets = useSelector((state) => state.diets);
   const dietsStatus = useSelector((state) => state.dietsStatus);

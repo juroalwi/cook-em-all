@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar.jsx";
-import ScreenSizeProvider from "../../providers/ScreenSizeProvider.jsx";
+import { SearchBar } from "../SearchBar/SearchBar.jsx";
+import { ScreenSizeProvider } from "../../providers/ScreenSizeProvider.jsx";
 
 export const NavBar = () => {
   const navigate = useNavigate();

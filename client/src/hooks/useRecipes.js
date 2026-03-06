@@ -10,9 +10,9 @@ import {
   setRecipesFilters as setRecipesFiltersAction,
   setRecipesIndex as setREcipesIndexAction,
 } from "../redux/actions";
-import useScreenSize from "./useScreenSize";
+import { useScreenSize } from "./useScreenSize";
 
-export default function useRecipes() {
+export const useRecipes = () => {
   const dispatch = useDispatch();
   const { isMobile } = useScreenSize();
   const recipes = useSelector((state) => state.recipes);
