@@ -122,7 +122,7 @@ export const CreateRecipe = () => {
     <div
       className={twMerge(
         "max-w-250 lg:mx-auto lg:my-16",
-        !isMobile && "light-shadow-small rounded",
+        !isMobile && "light-shadow-small rounded-sm",
       )}
     >
       <div className="flex w-full flex-col gap-2 p-8 lg:gap-4">
@@ -133,7 +133,7 @@ export const CreateRecipe = () => {
             <Error message={errors.title} />
           </div>
 
-          <div className="flex items-start gap-8">
+          <div className="flex items-start gap-8 max-[440px]:flex-col max-[440px]:gap-2">
             <div className="flex w-full max-w-50 flex-col gap-2">
               <Label>score</Label>
               <StarRating
@@ -146,12 +146,22 @@ export const CreateRecipe = () => {
               />
               <Error message={errors.score} />
             </div>
+
             <div className="flex w-full max-w-50 flex-col gap-2">
               <Label>health</Label>
-              <Input
-                name="healthScore"
-                value={values.healthScore}
-                onChange={handleChange}
+              <HealthRating
+                value={parseFloat(values.healthScore) || 0}
+                onChange={(rating) =>
+                  handleChange({
+                    target: {
+                      name: "healthScore",
+                      value: Math.max(
+                        0,
+                        Math.min(100, Math.round(rating)),
+                      ).toString(),
+                    },
+                  })
+                }
               />
               <Error message={errors.healthScore} />
             </div>
@@ -168,9 +178,9 @@ export const CreateRecipe = () => {
                   key={i}
                   onClick={() => handleToggleDiet(diet, i)}
                   className={twMerge(
-                    "cursor-pointer rounded-full border px-2 py-0.5 text-xs tracking-wide transition-all hover:opacity-90 lg:px-4 lg:py-1 lg:text-sm",
+                    "cursor-pointer rounded-full border px-2 py-0.5 text-xs font-medium tracking-wide transition-all hover:opacity-90 lg:px-4 lg:py-1 lg:text-sm",
                     active
-                      ? "border-custom-white bg-custom-white text-custom-red font-semibold"
+                      ? "border-custom-white bg-custom-white text-custom-red"
                       : "text-custom-white/80 border-custom-white/40",
                   )}
                 >
@@ -198,18 +208,18 @@ export const CreateRecipe = () => {
 
         <div className="flex flex-col gap-2">
           <Label>add instruction</Label>
-          <div className="flex items-center gap-4">
+          <div className="flex h-11 items-stretch gap-4">
             <TextArea
               name="instruction"
               value={values.instruction}
               onChange={handleChange}
-              className="h-10 lg:h-15"
+              className="h-full"
             />
             <SmallButton
               type="button"
               onClick={handleAddInstruction}
               disabled={!values.instruction.length}
-              className="h-9 w-9 lg:h-12 lg:w-12"
+              className="aspect-square h-full"
             >
               +
             </SmallButton>
@@ -245,7 +255,7 @@ export const CreateRecipe = () => {
             !values.score ||
             !values.healthScore
           }
-          className="bg-custom-red text-custom-black w-fit cursor-pointer self-center rounded px-4 py-2 text-base font-semibold tracking-wider uppercase disabled:cursor-not-allowed disabled:opacity-60 lg:self-end lg:px-8 lg:py-3 lg:text-xl lg:font-bold"
+          className="bg-custom-red text-custom-black w-fit cursor-pointer self-end rounded-xs px-4 py-2 text-base font-semibold tracking-wider uppercase disabled:cursor-not-allowed disabled:opacity-60 lg:px-6 lg:py-2 lg:text-lg lg:font-bold"
         >
           let's cook
         </button>
@@ -275,12 +285,12 @@ const Input = ({ name, value, onChange, className }) => {
       onChange={onChange}
       autoComplete="off"
       className={twMerge(
-        "text-custom-white border-custom-white/40 focus:border-custom-white h-[42px] w-full rounded-xs border bg-transparent px-3 py-2 text-sm transition-all lg:text-base",
+        "text-custom-white border-custom-white/40 focus:border-custom-white h-11 w-full rounded-xs border bg-transparent px-3 py-2 text-sm transition-all lg:text-base",
         className,
       )}
     />
   );
-}
+};
 
 const TextArea = ({ name, value, onChange, className }) => {
   return (
@@ -307,42 +317,60 @@ const Error = ({ message }) => {
       {message}
     </div>
   );
-}
+};
 
-function StarRating({ value, onChange }) {
-  const [hoveredStar, setHoveredStar] = useState(null);
-
-  const handleStarClick = (rating) => {
-    onChange(rating);
-  };
-
-  const handleStarHover = (rating) => {
-    setHoveredStar(rating);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredStar(null);
-  };
-
+const StarRating = ({ value, onChange }) => {
   return (
-    <div className="flex items-center gap-1" onMouseLeave={handleMouseLeave}>
-      {[1, 2, 3, 4, 5].map((star) => {
-        const isFilled = star <= (hoveredStar || value);
-        return (
-          <button
-            key={star}
-            type="button"
-            onClick={() => handleStarClick(star)}
-            onMouseEnter={() => handleStarHover(star)}
-            className="text-2xl transition-all hover:scale-110 focus:outline-none"
-          >
-            <span className={isFilled ? "text-yellow-400" : "text-gray-600"}>
-              ★
-            </span>
-          </button>
-        );
-      })}
-      <span className="text-custom-white ml-2 text-sm">({value}/5)</span>
+    <div className="flex h-8 items-center gap-3">
+      <div className="flex items-center gap-1">
+        {[1, 2, 3, 4, 5].map((star) => {
+          const isFilled = star <= value;
+          return (
+            <button
+              key={star}
+              type="button"
+              onMouseEnter={() => onChange(star)}
+              className="text-2xl transition-all hover:scale-110 focus:outline-none"
+            >
+              <span className={isFilled ? "text-yellow-400" : "text-gray-600"}>
+                ★
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      <span className="text-custom-white/80 text-sm">({value}/5)</span>
+    </div>
+  );
+};
+
+const HealthRating = ({ value, onChange }) => {
+  const [isDragging, setIsDragging] = useState(false);
+  return (
+    <div className="flex h-8 items-center gap-3">
+      <div
+        className={twMerge(
+          "flex h-full w-[128px] items-center",
+          isDragging ? "cursor-grabbing" : "cursor-grab",
+        )}
+        onMouseDown={() => setIsDragging(true)}
+        onMouseUp={() => setIsDragging(false)}
+        onMouseLeave={() => setIsDragging(false)}
+        onMouseMove={(e) => {
+          if (!isDragging) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          onChange(((e.nativeEvent.offsetX - 10) / (rect.width - 20)) * 100);
+        }}
+      >
+        <div className="bg-custom-white/20 relative h-2 w-[120px] rounded-full">
+          <div
+            className="absolute h-full rounded-full bg-green-500"
+            style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+          />
+        </div>
+      </div>
+
+      <span className="text-custom-white/80 w-8 text-sm">{value}%</span>
     </div>
   );
 };
@@ -353,11 +381,11 @@ const SmallButton = ({ onClick, disabled, className, children }) => {
       onClick={onClick}
       disabled={disabled}
       className={twMerge(
-        "bg-custom-white text-custom-black flex h-10 w-10 cursor-pointer items-center justify-center rounded text-lg font-bold transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50",
+        "bg-custom-white text-custom-black flex cursor-pointer items-center justify-center rounded-xs text-lg font-bold transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
     >
       {children}
     </button>
   );
-}
+};
