@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { NavBar } from "./components/NavBar/NavBar.jsx";
 import { Recipes } from "./components/Recipes/Recipes.jsx";
 import { RecipeDetail } from "./components/RecipeDetail/RecipeDetail.jsx";
 import { CreateRecipe } from "./components/CreateRecipe/CreateRecipe.jsx";
-
 import { useScreenSize } from "./hooks/useScreenSize.js";
 import { useDiets } from "./hooks/useDiets.js";
 import { useRecipes } from "./hooks/useRecipes.js";
@@ -18,14 +16,12 @@ export const App = () => {
   useEffect(() => {
     fetchDiets();
     fetchRecipes();
-  }, []);
+  }, [fetchDiets, fetchRecipes]);
 
   return (
     <div
       className={
-        isMobile
-          ? "mx-auto max-w-120 min-w-70"
-          : "flex min-h-screen flex-col"
+        isMobile ? "mx-auto max-w-120 min-w-70" : "flex min-h-screen flex-col"
       }
     >
       <NavBar />
@@ -36,4 +32,4 @@ export const App = () => {
       </Routes>
     </div>
   );
-}
+};
