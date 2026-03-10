@@ -84,12 +84,14 @@ export const CreateRecipe = () => {
 
       <div className="flex w-full flex-col gap-2">
         <Label>diets</Label>
-        <div className="flex flex-wrap gap-2 lg:gap-3">
+        <div className="flex flex-wrap gap-2">
           {diets.map((diet) => {
             const isOn = form.diets.includes(diet);
             return (
-              <div
+              <Tag
                 key={diet}
+                name={diet}
+                isOn={isOn}
                 onClick={() => {
                   setForm((prev) => ({
                     ...prev,
@@ -98,15 +100,7 @@ export const CreateRecipe = () => {
                       : [...form.diets, diet],
                   }));
                 }}
-                className={twMerge(
-                  "cursor-pointer rounded-full border px-2 py-0.5 text-xs font-medium tracking-wide transition-all hover:opacity-90 lg:px-4 lg:py-1 lg:text-sm",
-                  isOn
-                    ? "border-custom-white bg-custom-white text-custom-red"
-                    : "text-custom-white/80 border-custom-white/40",
-                )}
-              >
-                {diet}
-              </div>
+              />
             );
           })}
         </div>
@@ -231,6 +225,22 @@ const TextArea = ({ name, value, onChange, className }) => {
         className,
       )}
     />
+  );
+};
+
+const Tag = ({ name, isOn, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className={twMerge(
+        "cursor-pointer rounded-full border px-2.5 py-0.5 text-xs font-medium tracking-wide transition-all hover:opacity-90 lg:text-sm",
+        isOn
+          ? "border-custom-white bg-custom-white text-custom-red"
+          : "text-custom-white/80 border-custom-white/40",
+      )}
+    >
+      {name}
+    </div>
   );
 };
 
