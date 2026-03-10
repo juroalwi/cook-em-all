@@ -2,7 +2,9 @@ import axios from "axios";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDiets } from "../../hooks/useDiets";
+import { useDiets } from "hooks/useDiets";
+import { Slider } from "components/Slider";
+import { Tag } from "components/Tag";
 
 export const CreateRecipe = () => {
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ export const CreateRecipe = () => {
 
           <div className="flex w-full max-w-50 flex-col gap-2">
             <Label>healthy</Label>
-            <HealthRating
+            <Slider
               value={form.healthScore || 0}
               onChange={(rating) =>
                 handleFormUpdate(
@@ -225,90 +227,6 @@ const TextArea = ({ name, value, onChange, className }) => {
         className,
       )}
     />
-  );
-};
-
-const Tag = ({ name, isOn, onClick }) => {
-  return (
-    <div
-      onClick={onClick}
-      className={twMerge(
-        "cursor-pointer rounded-full border px-2.5 py-0.5 text-xs font-medium tracking-wide transition-all hover:opacity-90 lg:text-sm",
-        isOn
-          ? "border-custom-white bg-custom-white text-custom-red"
-          : "text-custom-white/80 border-custom-white/40",
-      )}
-    >
-      {name}
-    </div>
-  );
-};
-
-const StarRating = ({ value, onChange }) => {
-  return (
-    <div className="flex h-8 items-center gap-3">
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((star) => {
-          const isFilled = star <= value;
-          return (
-            <button
-              key={star}
-              type="button"
-              onMouseEnter={() => onChange(star)}
-              className="text-2xl transition-all hover:scale-110 focus:outline-none"
-            >
-              <span className={isFilled ? "text-yellow-400" : "text-gray-600"}>
-                ★
-              </span>
-            </button>
-          );
-        })}
-      </div>
-      <span className="text-custom-white/80 text-sm">({value}/5)</span>
-    </div>
-  );
-};
-
-const HealthRating = ({ value, onChange }) => {
-  const [isDragging, setIsDragging] = useState(false);
-  return (
-    <div className="flex h-8 items-center gap-3">
-      <div
-        className={twMerge(
-          "flex h-full w-[128px] items-center",
-          isDragging ? "cursor-grabbing" : "cursor-grab",
-        )}
-        onMouseDown={() => setIsDragging(true)}
-        onMouseUp={() => setIsDragging(false)}
-        onMouseLeave={() => setIsDragging(false)}
-        onMouseMove={(e) => {
-          if (!isDragging) return;
-          const rect = e.currentTarget.getBoundingClientRect();
-          onChange(((e.nativeEvent.offsetX - 10) / (rect.width - 20)) * 100);
-        }}
-      >
-        <div className="bg-custom-white/20 relative h-2 w-[120px] rounded-full">
-          <div
-            className="absolute h-full rounded-full bg-green-500"
-            style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-          />
-        </div>
-      </div>
-
-      <span className="text-custom-white/80 w-8 text-sm">{value}%</span>
-    </div>
-  );
-};
-
-const Tooltip = ({ text, children }) => {
-  return (
-    <div className="group relative w-fit">
-      {children}
-
-      <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded bg-black px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100">
-        {text}
-      </div>
-    </div>
   );
 };
 
