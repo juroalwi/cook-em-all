@@ -86,4 +86,4 @@ export const useRecipes = () => {
     recipesPage: Math.floor(recipesIndex / recipesPerPage) + 1,
     recipesMaxPage: Math.ceil(filteredRecipes.length / recipesPerPage),
   };
-}
+};

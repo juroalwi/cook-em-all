@@ -16,4 +16,4 @@ export const useDiets = () => {
     fetchDiets,
     dietsStatus,
   };
-}
+};

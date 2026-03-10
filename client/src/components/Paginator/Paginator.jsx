@@ -1,7 +1,3 @@
-import useScreenSize from "../../hooks/useScreenSize.js";
-import RightArrowIcon from "../../media/icons/RightArrowIcon.jsx";
-import LeftArrowIcon from "../../media/icons/LeftArrowIcon.jsx";
-import useRecipes from "../../hooks/useRecipes.js";
 import { twMerge } from "tailwind-merge";
 import { useScreenSize } from "../../hooks/useScreenSize.js";
 import { RightArrowIcon } from "../../media/icons/RightArrowIcon.jsx";
@@ -51,7 +47,7 @@ export const Paginator = () => {
             <button
               key={page}
               className={twMerge(
-                "text-custom-white hover:bg-custom-black h-14 w-14 bg-transparent text-xl font-semibold transition-colors duration-300 cursor-pointer rounded-xs",
+                "text-custom-white hover:bg-custom-black h-14 w-14 cursor-pointer rounded-xs bg-transparent text-xl font-semibold transition-colors duration-300",
                 isSelected && "bg-custom-red hover:bg-custom-red",
               )}
               onClick={() => handlePageChange(page)}
@@ -62,4 +58,4 @@ export const Paginator = () => {
         })}
     </div>
   );
-}
+};

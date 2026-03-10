@@ -1,5 +1,5 @@
-import { Recipe } from "../Recipe/Recipe.jsx";
 import { useRecipes } from "../../hooks/useRecipes.js";
+import { Recipe } from "../Recipe/Recipe.jsx";
 import { useDiets } from "../../hooks/useDiets.js";
 import { RecipesFilters } from "../RecipesFilters/RecipesFilters.jsx";
 import { Paginator } from "../Paginator/Paginator.jsx";
@@ -34,7 +34,7 @@ export const Recipes = () => {
 
   return (
     <Wrapper>
-      <div className="flex justify-center flex-wrap gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {displayedRecipes.map((recipe) => {
           return (
             <Recipe
@@ -50,12 +50,12 @@ export const Recipes = () => {
       </div>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = ({ children }) => {
   return (
-    <div className="flex flex-grow flex-col gap-8 p-8 h-full max-lg:p-4">
-      <div className="pl-32 w-full max-lg:pl-0">
+    <div className="flex h-full flex-grow flex-col gap-8 p-8 max-lg:p-4">
+      <div className="w-full pl-32 max-lg:pl-0">
         <RecipesFilters />
       </div>
 
@@ -66,4 +66,4 @@ const Wrapper = ({ children }) => {
       </div>
     </div>
   );
-}
+};

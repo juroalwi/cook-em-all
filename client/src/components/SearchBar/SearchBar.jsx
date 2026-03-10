@@ -27,7 +27,7 @@ export const SearchBar = () => {
       placeholder="Search recipe..."
       onChange={handleChange}
       value={query}
-      className="py-3.75! px-7.5! w-full max-w-150 bg-custom-white text-custom-black text-base rounded-xs"
+      className="bg-custom-white text-custom-black w-full max-w-150 rounded-xs px-7.5! py-3.75! text-base"
     />
   );
-}
+};

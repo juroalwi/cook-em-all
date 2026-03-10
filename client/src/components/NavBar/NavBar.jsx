@@ -13,7 +13,10 @@ export const NavBar = () => {
     <ScreenSizeProvider>
       <nav className="lg:light-shadow-small flex flex-col-reverse items-center justify-between gap-4 bg-transparent px-4 py-2 lg:flex-row lg:gap-16 lg:px-8 lg:py-4">
         <div className="hidden w-full items-center justify-center gap-4 lg:flex">
-          <div className="flex items-center gap-4 cursor-pointer" onClick={handleLogoClick}>
+          <div
+            className="flex cursor-pointer items-center gap-4"
+            onClick={handleLogoClick}
+          >
             <img
               src="/logo.svg"
               className="h-17.5 invert-100"
@@ -45,4 +48,4 @@ export const NavBar = () => {
       </nav>
     </ScreenSizeProvider>
   );
-}
+};
