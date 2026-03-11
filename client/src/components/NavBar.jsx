@@ -10,21 +10,20 @@ export const NavBar = () => {
   useEffect(() => {
     const id = setTimeout(() => {
       fetchRecipes(query);
-      navigate("/");
     }, 400);
     return () => clearTimeout(id);
   }, [query]);
 
-  const handleLogoClick = () => {
+  const handleHomeNavigate = () => {
     navigate("/");
   };
 
   return (
-    <nav className="lg:light-shadow-small flex flex-col-reverse items-center justify-between gap-4 bg-transparent px-4 py-2 lg:flex-row lg:gap-16 lg:px-8 lg:py-4">
+    <nav className="lg:light-shadow flex flex-col-reverse items-center justify-between gap-4 bg-transparent px-4 py-2 lg:flex-row lg:gap-16 lg:px-8 lg:py-4">
       <div className="hidden w-full items-center justify-center gap-4 lg:flex">
         <div
           className="flex cursor-pointer items-center gap-4"
-          onClick={handleLogoClick}
+          onClick={handleHomeNavigate}
         >
           <img
             src="/logo.svg"
@@ -37,7 +36,11 @@ export const NavBar = () => {
         </div>
       </div>
 
-      <SearchBar value={query} onChange={(query) => setQuery(query)} />
+      <SearchBar
+        value={query}
+        onChange={(query) => setQuery(query)}
+        onEnterKeyPress={handleHomeNavigate}
+      />
 
       <div className="flex w-full items-center justify-evenly gap-8">
         <p
@@ -58,7 +61,7 @@ export const NavBar = () => {
   );
 };
 
-const SearchBar = ({ value, onChange }) => {
+const SearchBar = ({ value, onChange, onEnterKeyPress }) => {
   const handleChange = (event) => {
     onChange(event.target.value);
   };
@@ -66,6 +69,11 @@ const SearchBar = ({ value, onChange }) => {
   return (
     <input
       type="text"
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          onEnterKeyPress();
+        }
+      }}
       name="query"
       autoComplete="off"
       placeholder="Search recipe..."
