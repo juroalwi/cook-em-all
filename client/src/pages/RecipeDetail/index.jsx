@@ -109,35 +109,39 @@ const Content = ({ details }) => {
 
         <ul className="flex flex-wrap gap-2">
           {details.diets.map((diet) => (
-            <Tag name={diet} isStatic />
+            <Tag key={diet} name={diet} isStatic />
           ))}
         </ul>
 
-        <div className="flex flex-col gap-1">
-          <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
-            summary
-          </h1>
-          <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
-            {details.summary}
+        {details.summary && (
+          <div className="flex flex-col gap-1">
+            <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
+              summary
+            </h1>
+            <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
+              {details.summary}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="flex flex-col gap-1">
-          <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
-            instructions
-          </h1>
-          <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
-            <ol>
-              {details.instructions.map((instruction, index) => {
-                return (
-                  <li key={index}>
-                    {index + 1}. {instruction}
-                  </li>
-                );
-              })}
-            </ol>
+        {details.instructios?.length && (
+          <div className="flex flex-col gap-1">
+            <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
+              instructions
+            </h1>
+            <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
+              <ol>
+                {details.instructions.map((instruction, index) => {
+                  return (
+                    <li key={index}>
+                      {index + 1}. {instruction}
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
