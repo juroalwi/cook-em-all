@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { NotificationBox } from "src/components/NotificationBox";
 
-export const RecipeNotFound = () => {
+export const CreationError = () => {
   const navigate = useNavigate();
 
   return (
     <div className="mx-4 my-8 lg:mx-8 lg:my-12">
       <div className="mx-auto w-fit">
         <NotificationBox
-          title="Recipe not found"
-          description="We couldn't find the recipe you're looking for. It may have been removed or the link might be incorrect."
-          secondaryCta={{ text: "Go back", onClick: () => navigate(-1) }}
+          title="Recipe creation failed"
+          description="We couldn't create your recipe. Please try again later."
+          secondaryCta={{ text: "Home", onClick: () => navigate("/") }}
         />
       </div>
     </div>

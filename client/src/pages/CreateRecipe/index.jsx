@@ -7,10 +7,14 @@ import { Slider } from "src/components/Slider";
 import { Tag } from "src/components/Tag";
 import { StarRating } from "src/components/StarRating";
 import { Tooltip } from "src/components/Tooltip";
+import { Loading } from "src/components/Loading";
+import { CreationError } from "./CreationError";
 
 export const CreateRecipe = () => {
   const navigate = useNavigate();
   const { diets } = useDiets();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCreationError, setIsCreationError] = useState(false);
   const [instructionDraft, setInstructionDraft] = useState("");
   const [form, setForm] = useState({
     title: "",
@@ -24,6 +28,7 @@ export const CreateRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       const result = await axios({
         method: "post",
         url: "/recipes/create",
@@ -38,8 +43,10 @@ export const CreateRecipe = () => {
         },
       });
       navigate(`/recipe/detail/${result.data.id}`);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      setIsCreationError(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -49,6 +56,14 @@ export const CreateRecipe = () => {
       [field]: value,
     }));
   };
+
+  if (isSubmitting) {
+    return <Loading />;
+  }
+
+  if (isCreationError) {
+    return <CreationError />;
+  }
 
   return (
     <div className="mx-4 my-8 lg:mx-8 lg:my-12">

@@ -1,4 +1,4 @@
-export const NotFound = ({
+export const NotificationBox = ({
   icon = "🍽",
   title,
   description,

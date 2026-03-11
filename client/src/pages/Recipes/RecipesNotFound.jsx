@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { NotFound } from "src/components/NotFound";
+import { NotificationBox } from "src/components/NotificationBox";
 
 export const RecipesNotFound = ({ onReset }) => {
   const navigate = useNavigate();
@@ -7,7 +7,7 @@ export const RecipesNotFound = ({ onReset }) => {
   return (
     <div className="mx-4 my-8 lg:mx-8 lg:my-12">
       <div className="mx-auto w-fit">
-        <NotFound
+        <NotificationBox
           title="No recipes found"
           description="We couldn't find any recipes matching your search or filters. Try adjusting them or create a new recipe."
           secondaryCta={{ text: "Reset filters", onClick: onReset }}
