@@ -26,12 +26,14 @@ export const Recipes = () => {
 
   if (
     recipesStatus === fetchStatus.LOADING ||
-    dietsStatus === fetchStatus.LOADING
+    recipesStatus === fetchStatus.IDLE ||
+    dietsStatus === fetchStatus.LOADING ||
+    dietsStatus === fetchStatus.IDLE
   ) {
     return <Loading />;
   }
 
-  if (recipesStatus === fetchStatus.NOT_FOUND || !displayedRecipes.length) {
+  if (recipesStatus === fetchStatus.NOT_FOUND) {
     return (
       <Wrapper
         diets={diets}

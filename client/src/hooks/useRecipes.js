@@ -15,7 +15,7 @@ import { useScreenSize } from "./useScreenSize";
 export const useRecipes = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes);
-  const recipesLoading = useSelector((state) => state.recipesLoading);
+  const recipesStatus = useSelector((state) => state.recipesStatus);
   const recipesIndex = useSelector((state) => state.recipesIndex);
   const recipesFilters = useSelector((state) => state.recipesFilters);
   const recipesSortBy = useSelector((state) => state.recipesSortBy);
@@ -71,7 +71,7 @@ export const useRecipes = () => {
     setRecipesSortBy,
     setRecipesFilters,
     setRecipesPage,
-    recipesLoading,
+    recipesStatus,
     recipesSortBy,
     recipesFilters,
     recipesPage: Math.floor(recipesIndex / recipesPerPage) + 1,

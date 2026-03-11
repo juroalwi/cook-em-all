@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecipes } from "src/hooks/useRecipes.js";
 
 export const NavBar = () => {
   const navigate = useNavigate();
+  const isFirstRender = useRef(true);
   const { fetchRecipes } = useRecipes();
   const [query, setQuery] = useState("");
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const id = setTimeout(() => {
       fetchRecipes(query);
     }, 400);

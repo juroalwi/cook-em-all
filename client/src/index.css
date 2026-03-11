@@ -7,7 +7,7 @@
   --color-custom-white: #faf0e0;
   --color-custom-red: #ff2b55;
   --color-custom-yellow: #fbbd0d;
-  --animate-expand: expansion 2s infinite;
+  --animate-expand: expansion 1.2s infinite;
 
   @keyframes expansion {
     0%,
