@@ -1,12 +1,12 @@
 export const Loading = () => {
   return (
-    <div className="h-[90.4vh] flex justify-center items-center bg-black">
+    <div className="flex h-[90.4vh] items-center justify-center bg-black">
       {[0, 1, 2, 3, 4].map((i) => (
         <div
           key={i}
-          className={`w-20 h-20 inline-block rounded-full bg-custom-white loading-dot loading-dot-${i}`}
+          className={`bg-custom-white loading-dot inline-block h-20 w-20 rounded-full loading-dot-${i}`}
         />
       ))}
     </div>
   );
-}
+};

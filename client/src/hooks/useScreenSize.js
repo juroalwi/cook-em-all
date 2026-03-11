@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ScreenSizeContext } from "../providers/ScreenSizeProvider";
+import { ScreenSizeContext } from "src/providers/ScreenSizeProvider";
 
 export const useScreenSize = () => {
   const ctx = useContext(ScreenSizeContext);
@@ -11,4 +11,4 @@ export const useScreenSize = () => {
   }
 
   return { isMobile: ctx.isMobile };
-}
+};

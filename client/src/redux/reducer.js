@@ -1,4 +1,4 @@
-import { fetchStatus } from "../utils/constants";
+import { fetchStatus } from "src/utils/constants";
 
 export const SET_DIETS = "SET_DIETS";
 export const SET_DIETS_STATUS = "SET_DIETS_STATUS";
@@ -18,7 +18,7 @@ const initialState = {
   recipesSortBy: null,
 };
 
-export default function reducer(state = initialState, { type, payload }) {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_DIETS:
       return {
@@ -74,4 +74,4 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
       };
   }
-}
+};

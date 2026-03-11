@@ -1,8 +1,9 @@
-import { NotFound } from "src/components/NotFound";
 import { useNavigate } from "react-router-dom";
+import { NotFound } from "src/components/NotFound";
 
 export const RecipesNotFound = ({ onReset }) => {
   const navigate = useNavigate();
+
   return (
     <div className="mx-4 my-8 lg:mx-8 lg:my-12">
       <div className="mx-auto w-fit">

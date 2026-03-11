@@ -8,10 +8,10 @@ import {
   SET_RECIPES_INDEX,
   SET_RECIPES_SORT_BY,
 } from "./reducer";
-import { fetchStatus } from "../utils/constants";
+import { fetchStatus } from "src/utils/constants";
 
-export function fetchDiets() {
-  return async function (dispatch) {
+export const fetchDiets = () => {
+  return async (dispatch) => {
     dispatch({
       type: SET_DIETS_STATUS,
       payload: fetchStatus.LOADING,
@@ -46,10 +46,10 @@ export function fetchDiets() {
       });
     }
   };
-}
+};
 
-export function fetchRecipes(query) {
-  return async function (dispatch) {
+export const fetchRecipes = (query) => {
+  return async (dispatch) => {
     dispatch({
       type: SET_RECIPES_STATUS,
       payload: fetchStatus.LOADING,
@@ -85,25 +85,25 @@ export function fetchRecipes(query) {
       });
     }
   };
-}
+};
 
-export function setRecipesFilters(filters) {
+export const setRecipesFilters = (filters) => {
   return {
     type: SET_RECIPES_FILTERS,
     payload: filters,
   };
-}
+};
 
-export function setRecipesSortBy(sortBy) {
+export const setRecipesSortBy = (sortBy) => {
   return {
     type: SET_RECIPES_SORT_BY,
     payload: sortBy,
   };
-}
+};
 
-export function setRecipesIndex(index) {
+export const setRecipesIndex = (index) => {
   return {
     type: SET_RECIPES_INDEX,
     payload: index,
   };
-}
+};

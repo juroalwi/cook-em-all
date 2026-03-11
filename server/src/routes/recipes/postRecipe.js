@@ -1,5 +1,5 @@
 import { Op } from "@sequelize/core";
-import { recipeModel, dietModel } from "../../db.js";
+import { dietModel, recipeModel } from "../../db.js";
 
 export const postRecipe = async (req, res, next) => {
   const {

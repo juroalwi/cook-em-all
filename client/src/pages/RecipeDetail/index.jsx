@@ -2,11 +2,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useScreenSize } from "src/hooks/useScreenSize";
 import { Image } from "src/components/Image";
 import { Loading } from "src/components/Loading";
 import { StarRating } from "src/components/StarRating";
 import { Tag } from "src/components/Tag";
-import { useScreenSize } from "src/hooks/useScreenSize";
 import { RecipeNotFound } from "./RecipeNotFound";
 
 export const RecipeDetail = () => {
