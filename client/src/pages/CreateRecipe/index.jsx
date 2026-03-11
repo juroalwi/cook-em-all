@@ -166,7 +166,7 @@ export const CreateRecipe = () => {
           </div>
 
           <div className="text-custom-white custom-scrollbar flex max-h-40 flex-col gap-1 overflow-x-hidden overflow-y-auto text-xs lg:text-sm">
-            {form.instructions.map((inst, index) => (
+            {form.instructions.map((instruction, index) => (
               <div
                 key={index}
                 className="flex items-start justify-start gap-2 p-1 lg:gap-3"
@@ -183,8 +183,8 @@ export const CreateRecipe = () => {
                   -
                 </SmallButton>
 
-                <p className="no-scrollbar max-h-12 overflow-y-scroll break-all">
-                  {inst}
+                <p className="no-scrollbar max-h-12 overflow-y-scroll">
+                  {instruction}
                 </p>
               </div>
             ))}
@@ -197,7 +197,7 @@ export const CreateRecipe = () => {
           <button
             onClick={handleSubmit}
             disabled={!form.title}
-            className="bg-custom-red text-custom-black mt-2 w-fit cursor-pointer self-end rounded-xs px-4 py-2 text-base font-semibold tracking-wider uppercase disabled:cursor-not-allowed disabled:opacity-60 lg:px-6 lg:py-2 lg:text-lg lg:font-bold"
+            className="bg-custom-red text-custom-black mt-2 w-fit cursor-pointer self-end rounded-xs px-4 py-2 text-base font-semibold tracking-wider uppercase transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 lg:px-6 lg:py-2 lg:text-lg lg:font-bold"
           >
             let's cook
           </button>
