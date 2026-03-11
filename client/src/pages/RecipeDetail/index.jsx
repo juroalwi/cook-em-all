@@ -59,7 +59,7 @@ export const RecipeDetail = () => {
 
   return (
     <div className="mx-8 my-12">
-      <div className="light-shadow mx-auto flex max-w-300 overflow-hidden rounded-xs">
+      <div className="mx-auto flex max-w-300 overflow-hidden rounded-xs">
         <div
           className="bg-custom-white grow pr-8"
           style={{
