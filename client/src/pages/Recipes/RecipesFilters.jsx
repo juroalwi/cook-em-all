@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { useRecipes } from "../../hooks/useRecipes.js";
-import { useDiets } from "../../hooks/useDiets.js";
-import { useScreenSize } from "../../hooks/useScreenSize.js";
-import { FiltersIcon } from "../../media/icons/FiltersIcon.jsx";
+import { FiltersIcon } from "src/media/icons/FiltersIcon";
+import { Tag } from "src/components/Tag";
 
-export const RecipesFilters = () => {
-  const { isMobile } = useScreenSize();
-  const { diets } = useDiets();
-  const { setRecipesFilters, setRecipesSortBy, recipesFilters, recipesSortBy } =
-    useRecipes();
-
+export const RecipesFilters = ({
+  diets,
+  setRecipesFilters,
+  setRecipesSortBy,
+  recipesFilters,
+  recipesSortBy,
+  isMobile,
+}) => {
   const handleFiltersUpdate = (filter) => {
     const index = recipesFilters.indexOf(filter);
     setRecipesFilters(
       index !== -1
-        ? recipesFilters.filter((selectedFilter) => selectedFilter !== filter)
+        ? [
+            ...recipesFilters.slice(0, index),
+            ...recipesFilters.slice(index + 1),
+          ]
         : [...recipesFilters, filter],
     );
   };
@@ -83,19 +86,16 @@ export const RecipesFilters = () => {
         <div className="w-60 px-12 py-3 text-center text-xl font-medium shadow-[1px_2px_8px_0px_rgba(45,45,45,1)] transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none">
           Filters ({recipesFilters.length})
         </div>
-        <div className="absolute z-10 hidden w-100 flex-wrap gap-2.5 rounded-xs bg-black p-4 shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:flex">
-          {diets.map((diet, index) => {
-            const active = recipesFilters.includes(diet);
+        <div className="absolute z-10 hidden w-100 flex-wrap gap-2 rounded-xs bg-black p-4 shadow-[2px_4px_16px_0px_rgba(45,45,45,1)] group-hover:flex">
+          {diets.map((diet) => {
+            const isOn = recipesFilters.includes(diet);
             return (
-              <span
-                key={index}
-                className={`rounded-full px-2.5 py-1 text-base transition-opacity duration-200 hover:opacity-80 ${
-                  active ? "bg-custom-red" : "bg-custom-black"
-                }`}
+              <Tag
+                key={diet}
+                name={diet}
+                isOn={isOn}
                 onClick={() => handleFiltersUpdate(diet)}
-              >
-                {diet}
-              </span>
+              />
             );
           })}
         </div>
@@ -156,18 +156,15 @@ const RecipesFiltersMobile = ({
 
           <div className="text-lg font-semibold">Filters</div>
           <div className="flex cursor-pointer flex-wrap gap-2 p-2">
-            {diets.map((diet, index) => {
-              const active = recipesFilters.includes(diet);
+            {diets.map((diet) => {
+              const isOn = recipesFilters.includes(diet);
               return (
-                <div
-                  key={index}
-                  className={`rounded-full px-2.5 py-1 text-sm whitespace-nowrap ${
-                    active ? "bg-custom-red" : "bg-custom-black"
-                  }`}
+                <Tag
+                  key={diet}
+                  name={diet}
+                  isOn={isOn}
                   onClick={() => handleFiltersUpdate(diet)}
-                >
-                  {diet}
-                </div>
+                />
               );
             })}
           </div>

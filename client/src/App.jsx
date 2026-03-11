@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/NavBar/NavBar.jsx";
-import { Recipes } from "./components/Recipes/Recipes.jsx";
-import { RecipeDetail } from "./components/RecipeDetail/RecipeDetail.jsx";
-import { CreateRecipe } from "./components/CreateRecipe/CreateRecipe.jsx";
+import { Recipes } from "./pages/Recipes/index.jsx";
+import { RecipeDetail } from "./pages/RecipeDetail/index.jsx";
+import { CreateRecipe } from "./pages/CreateRecipe/index.jsx";
 import { useScreenSize } from "./hooks/useScreenSize.js";
 import { useDiets } from "./hooks/useDiets.js";
 import { useRecipes } from "./hooks/useRecipes.js";
+import { NavBar } from "./components/NavBar";
 
 export const App = () => {
   const { fetchDiets } = useDiets();

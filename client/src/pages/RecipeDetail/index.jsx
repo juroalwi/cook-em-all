@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Loading } from "../Loading/Loading.jsx";
+import { Loading } from "src/components/Loading";
 
 export const RecipeDetail = () => {
   const defaultRecipesNumber = 100;

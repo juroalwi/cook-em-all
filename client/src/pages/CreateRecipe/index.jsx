@@ -2,9 +2,11 @@ import axios from "axios";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDiets } from "hooks/useDiets";
-import { Slider } from "components/Slider";
-import { Tag } from "components/Tag";
+import { useDiets } from "src/hooks/useDiets";
+import { Slider } from "src/components/Slider";
+import { Tag } from "src/components/Tag";
+import { StarRating } from "src/components/StarRating";
+import { Tooltip } from "src/components/Tooltip";
 
 export const CreateRecipe = () => {
   const navigate = useNavigate();

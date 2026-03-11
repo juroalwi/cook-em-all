@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export const Slider = ({ value, onChange }) => {
   const [isDragging, setIsDragging] = useState(false);
