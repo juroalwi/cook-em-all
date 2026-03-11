@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Recipes } from "./pages/Recipes/index.jsx";
+import { RecipesFeed } from "./pages/RecipesFeed/index.jsx";
 import { RecipeDetail } from "./pages/RecipeDetail/index.jsx";
 import { CreateRecipe } from "./pages/CreateRecipe/index.jsx";
 import { useScreenSize } from "./hooks/useScreenSize.js";
@@ -28,7 +28,7 @@ export const App = () => {
       <Routes>
         <Route path="/recipe/detail/:id" element={<RecipeDetail />} />
         <Route path="/recipe/create" element={<CreateRecipe />} />
-        <Route path="/*" element={<Recipes />} index={true} />
+        <Route path="/*" element={<RecipesFeed />} index={true} />
       </Routes>
     </div>
   );

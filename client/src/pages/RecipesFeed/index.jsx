@@ -8,7 +8,7 @@ import { RecipeCard } from "./RecipeCard";
 import { RecipesFilters } from "./RecipesFilters";
 import { RecipesNotFound } from "./RecipesNotFound";
 
-export const Recipes = () => {
+export const RecipesFeed = () => {
   const { isMobile } = useScreenSize();
   const { diets, dietsStatus } = useDiets();
   const {
