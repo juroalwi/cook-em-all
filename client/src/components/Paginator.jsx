@@ -5,6 +5,10 @@ import { LeftArrowIcon } from "src/media/icons/LeftArrowIcon.jsx";
 export const Paginator = ({ onPageClick, currentPage, maxPage, isMobile }) => {
   const pages = [...Array(maxPage).keys()].map((i) => i + 1);
 
+  if (pages.length <= 1) {
+    return null;
+  }
+
   if (isMobile) {
     return (
       <PaginatorMobile
