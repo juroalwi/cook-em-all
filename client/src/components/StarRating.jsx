@@ -14,7 +14,7 @@ export const StarRating = ({ value, onChange, isStatic, className }) => {
 
           return (
             <button
-              key={star}
+              key={`star-${star}`}
               type="button"
               onMouseMove={
                 isStatic

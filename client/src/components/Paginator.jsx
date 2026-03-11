@@ -26,7 +26,7 @@ export const Paginator = ({ onPageClick, currentPage, maxPage, isMobile }) => {
           const isSelected = page === currentPage;
           return (
             <button
-              key={page}
+              key={`page-${page}`}
               className={twMerge(
                 "text-custom-white hover:bg-custom-black h-14 w-14 cursor-pointer rounded-xs bg-transparent text-xl font-semibold transition-colors duration-300",
                 isSelected && "bg-custom-red hover:bg-custom-red",

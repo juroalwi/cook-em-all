@@ -133,7 +133,7 @@ const Content = ({ details }) => {
               <ol>
                 {details.instructions.map((instruction, index) => {
                   return (
-                    <li key={index}>
+                    <li key={`instruction-${index}`}>
                       {index + 1}. {instruction}
                     </li>
                   );
