@@ -124,7 +124,7 @@ const Content = ({ details }) => {
           </div>
         )}
 
-        {details.instructios?.length && (
+        {details.instructions && details.instructions.length > 0 && (
           <div className="flex flex-col gap-1">
             <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
               instructions
