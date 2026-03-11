@@ -2,31 +2,23 @@
 
 ## About the project
 
-A single-page full-stack application that enables users to search recipes by
-name, as well as filter and sort results. The platform also supports creating
-new recipes and viewing detailed information for each recipe.
+A single-page full-stack application that enables users to search recipes by name, as well as filter and sort results. The platform also supports creating new recipes and viewing detailed information for each recipe.
 
-The application includes a custom backend built with Node.js, responsible for
-data processing, storage, and persistence. The client-side interface consumes
-this backend to deliver a seamless user experience.
+The application includes a custom backend built with Node.js, responsible for data processing, storage, and persistence. The client-side interface consumes this backend to deliver a seamless user experience.
 
-Recipe data is primarily fetched from  
-<a href='https://spoonacular.com/food-api'>Spoonacular</a>.
-To ensure reliability, the system implements a fallback mechanism that
-backfills and stores a set of default recipes in the local database, allowing
-continued functionality if the external API becomes unavailable.
+Recipe data is primarily fetched from <a href='https://spoonacular.com/food-api'>Spoonacular</a>. To ensure reliability, the system implements a fallback mechanism that backfills and stores a set of default recipes in the local database, allowing continued functionality if the external API becomes unavailable.
 
-#### Recipes cards
+#### Recipes feed
 
-<img src='/images/main.jpg'/>
+<img src='/images/main.png'/>
 
 #### Recipe detail
 
-<img src='/images/recipe-detail.jpg'/>
+<img src='/images/recipe-detail.png'/>
 
 #### Create recipe
 
-<img src='/images/create-recipe.jpg'/>
+<img src='/images/create-recipe.png'/>
 
 ## Technologies used
 
@@ -55,6 +47,5 @@ DB_URL=postgres://<your_pg_username>:<your_pg_password>@localhost/<your_pg_db_na
 
 - Install NodeJS (version >= 22.15.1) and npm (version >= 10.9.2).
 - Execute `npm install` on `/client` and on `/server` folders.
-- Execute `npm start` on `/client` folder to initialize backend.
-- Execute `npm start` on `/server` folder to initialize frontend.
+- Execute `npm start` on `/client` folder to initialize backend, and `npm start` on `/server` folder to initialize frontend.
 - Navigate to `http://localhost:5173` in your browser.
