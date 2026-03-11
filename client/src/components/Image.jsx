@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
+const DEFAULT_SRC = "/recipe.svg";
+
 export const Image = ({ src, className }) => {
-  const [imgSrc, setImgSrc] = useState(src || "/recipe.svg");
+  const [resolvedSrc, setResolvedSrc] = useState(src || DEFAULT_SRC);
   return (
     <img
-      src={imgSrc}
-      onError={() => setImgSrc("/recipe.svg")}
-      className={twMerge("object-cover", className)}
+      src={resolvedSrc}
+      onError={() => setResolvedSrc("/recipe.svg")}
+      className={twMerge(
+        "object-cover",
+        resolvedSrc === DEFAULT_SRC && "object-contain",
+        className,
+      )}
     />
   );
 };
