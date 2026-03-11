@@ -48,8 +48,14 @@ const getInternalRecipe = async (id) => {
     }
 
     return {
-      ...response.dataValues,
+      id: response.dataValues.id,
+      title: response.dataValues.title,
+      image: response.dataValues.image,
+      score: response.dataValues.score,
+      healthScore: response.dataValues.health_score,
+      summary: response.dataValues.summary,
       diets: response.dataValues.diets.map((diet) => diet.name),
+      instructions: response.dataValues.instructions,
     };
   } catch (error) {
     console.error(`Failed to get internal recipe detail ${id}: ${error}`);

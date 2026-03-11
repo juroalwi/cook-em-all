@@ -45,7 +45,7 @@ export const RecipesFilters = ({
   return (
     <div className="text-custom-white flex items-center gap-16">
       <div className="group relative cursor-pointer">
-        <div className="light-shadow-small w-60 rounded-xs px-12 py-3 text-center text-xl font-medium transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none">
+        <div className="light-shadow w-60 rounded-xs px-12 py-3 text-center text-xl font-medium transition-all duration-200 group-hover:opacity-80 group-hover:shadow-none">
           Sort by
           {recipesSortBy
             ? `: ${recipesSortBy === "az" ? "a-z" : recipesSortBy === "za" ? "z-a" : "score"}`

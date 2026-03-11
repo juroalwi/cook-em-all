@@ -28,14 +28,14 @@ export const StarRating = ({ value, onChange, isStatic, className }) => {
                     }
               }
               className={twMerge(
-                "relative text-2xl transition-all focus:outline-none",
+                "relative text-lg transition-all focus:outline-none lg:text-2xl",
                 isStatic ? "" : "hover:scale-110",
               )}
             >
               <span className="text-gray-600">★</span>
 
               <span
-                className="absolute top-0 left-0 overflow-hidden text-yellow-400"
+                className="absolute top-0 left-0 overflow-hidden text-amber-400"
                 style={{ width: `${fill * 100}%` }}
               >
                 ★

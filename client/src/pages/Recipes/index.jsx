@@ -6,6 +6,7 @@ import { Loading } from "src/components/Loading";
 import { Paginator } from "src/components/Paginator";
 import { RecipeCard } from "./RecipeCard";
 import { RecipesFilters } from "./RecipesFilters";
+import { RecipesNotFound } from "./RecipesNotFound";
 
 export const Recipes = () => {
   const { isMobile } = useScreenSize();
@@ -30,7 +31,7 @@ export const Recipes = () => {
     return <Loading />;
   }
 
-  if (recipesStatus === fetchStatus.NOT_FOUND) {
+  if (recipesStatus === fetchStatus.NOT_FOUND || !displayedRecipes.length) {
     return (
       <Wrapper
         diets={diets}

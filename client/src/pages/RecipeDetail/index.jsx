@@ -2,12 +2,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Image } from "src/components/Image";
 import { Loading } from "src/components/Loading";
+import { StarRating } from "src/components/StarRating";
+import { Tag } from "src/components/Tag";
+import { useScreenSize } from "src/hooks/useScreenSize";
+import { RecipeNotFound } from "./RecipeNotFound";
 
 export const RecipeDetail = () => {
-  const defaultRecipesNumber = 100;
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
+  const { isMobile } = useScreenSize();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [details, setDetails] = useState({
     title: "",
     image: "",
@@ -21,95 +27,118 @@ export const RecipeDetail = () => {
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(`/recipes/detail/${id}`);
         setDetails({
           ...details,
           ...response.data,
         });
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError || !details.title) {
+    return <RecipeNotFound />;
+  }
+
+  if (isMobile) {
+    return (
+      <div className="bg-custom-white light-shadow mx-4 my-8 overflow-hidden rounded-xs">
+        <Content details={details} />
+      </div>
+    );
+  }
+
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="m-[100px] bg-[url('../media/recipe-detail.jpg')] bg-[length:1100px_1650px] bg-[position:right_center] bg-no-repeat shadow-[0px_0px_8px_2px_rgba(155,155,155,0.8)]">
-          <div className="bg-custom-white text-custom-black flex w-[820px] flex-col shadow-[inset_-10px_0px_8px_0px_rgba(0,0,0,0.6),10px_0px_8px_0px_rgba(0,0,0,0.4)]">
-            {/* Border property is defined in order to avoid showing a border around */
-            /* the recipe's image when the recipe is an user created one (user created images */
-            /* are svg images with no background). */}
-            <img
-              src={details.image}
-              alt="recipe"
-              className={`my-3 mr-10 ml-3 h-[560px] bg-cover ${
-                !(details.id >= defaultRecipesNumber)
-                  ? "border border-black"
-                  : "border-none"
-              }`}
-            />
+    <div className="mx-8 my-12">
+      <div className="light-shadow mx-auto flex max-w-300 overflow-hidden rounded-xs">
+        <div
+          className="bg-custom-white grow pr-8"
+          style={{
+            zIndex: 10,
+            boxShadow: `
+            inset -10px 0px 8px 0px rgba(0,0,0,0.6),
+            10px 0px 8px 0px rgba(0,0,0,0.4)
+          `,
+          }}
+        >
+          <Content details={details} />
+        </div>
 
-            <div className="flex flex-col justify-start">
-              <h1 className="mx-12 my-8 mb-6 text-left text-[32px] font-normal tracking-wider uppercase">
-                {details.title}
-              </h1>
+        <div
+          style={{
+            backgroundImage: "url(/recipe-detail.jpg)",
+            backgroundPosition: "right center",
+            backgroundSize: "cover",
+          }}
+          className="hidden w-1/2 shrink-0 lg:flex"
+        />
+      </div>
+    </div>
+  );
+};
 
-              <div className="mb-[22px] flex">
-                <div className="m-[15px_25px] text-2xl">
-                  Score:{" "}
-                  <span
-                    className="bg-gradient-to-r bg-clip-text pl-[5px] text-2xl text-transparent"
-                    style={{
-                      backgroundImage: `linear-gradient(90deg, #FBBD0D ${details.score * 20}%, #111 ${details.score * 20}%)`,
-                    }}
-                  >
-                    ★★★★★
-                  </span>
-                </div>
-                <i className="text-custom-black m-[15px_20px] p-0.5 text-[22px] opacity-60">
-                  Health score: {details.healthScore}%
-                </i>
-              </div>
+const Content = ({ details }) => {
+  return (
+    <div className="flex grow flex-col p-4">
+      <Image src={details.image} className="h-80 lg:h-100" />
 
-              <ul className="mx-[15px] mb-8 flex flex-wrap">
-                {details.diets.map((diet, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className="bg-custom-black text-custom-white m-[5px] flex-shrink-0 rounded-full px-3 py-0.5 text-lg"
-                    >
-                      {diet}
-                    </li>
-                  );
-                })}
-              </ul>
+      <div className="flex flex-col gap-3 px-4 pt-4 lg:gap-5">
+        <h1 className="line-clamp-3 text-lg font-medium tracking-wide uppercase lg:text-2xl">
+          {details.title}
+        </h1>
 
-              <h1 className="mx-5 my-2.5 text-2xl">Summary:</h1>
-              <div className="custom-scrollbar-dark my-[15px] mr-10 ml-[15px] max-h-[250px] overflow-y-scroll bg-[#eae5d6] p-[10px_10px_10px_34px] text-lg">
-                {details.summary}
-              </div>
+        <div className="flex flex-wrap items-center gap-2 lg:gap-4">
+          <StarRating
+            value={details.score / 20}
+            isStatic
+            className="text-custom-black"
+          />
+          <i className="text-custom-black/60 text-sm whitespace-nowrap lg:text-lg">
+            Health score: {details.healthScore}%
+          </i>
+        </div>
 
-              <h1 className="mx-5 my-2.5 text-2xl">Instructions:</h1>
-              <div className="custom-scrollbar-dark my-[15px] mr-10 ml-[15px] max-h-[250px] overflow-y-scroll bg-[#eae5d6] p-[10px_10px_10px_34px] text-lg">
-                <ol>
-                  {details.instructions.map((instruction, index) => {
-                    return (
-                      <li key={index} className="list-decimal">
-                        {" "}
-                        {instruction}{" "}
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            </div>
+        <ul className="flex flex-wrap gap-2">
+          {details.diets.map((diet) => (
+            <Tag name={diet} isStatic />
+          ))}
+        </ul>
+
+        <div className="flex flex-col gap-1">
+          <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
+            summary
+          </h1>
+          <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
+            {details.summary}
           </div>
         </div>
-      )}
-    </>
+
+        <div className="flex flex-col gap-1">
+          <h1 className="text-base font-medium tracking-wide uppercase lg:text-lg">
+            instructions
+          </h1>
+          <div className="custom-scrollbar-dark bg-custom-black/4 max-h-60 overflow-y-scroll px-4 py-2 text-sm">
+            <ol>
+              {details.instructions.map((instruction, index) => {
+                return (
+                  <li key={index}>
+                    {index + 1}. {instruction}
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
