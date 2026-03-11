@@ -51,7 +51,7 @@ export const RecipeDetail = () => {
 
   if (isMobile) {
     return (
-      <div className="bg-custom-white light-shadow mx-4 my-8 overflow-hidden rounded-xs">
+      <div className="bg-custom-white mx-4 my-8 overflow-hidden rounded-xs">
         <Content details={details} />
       </div>
     );
