@@ -66,7 +66,7 @@ export const Recipes = () => {
       setRecipesPage={setRecipesPage}
       isMobile={isMobile}
     >
-      <div className="flex flex-wrap justify-center gap-3 lg:gap-8">
+      <div className="flex flex-wrap justify-center gap-5 lg:gap-8">
         {displayedRecipes.map((recipe) => {
           return (
             <RecipeCard
