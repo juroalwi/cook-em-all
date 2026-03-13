@@ -7,7 +7,7 @@ export const recipeModelCreator = (sequelize) => {
       type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
-      defaultValue: () => `CREATED_${randomUUID()}`,
+      defaultValue: () => randomUUID(),
     },
     title: {
       type: DataTypes.STRING,
