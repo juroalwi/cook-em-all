@@ -21,16 +21,15 @@ export const NavBar = () => {
     return () => clearTimeout(id);
   }, [query]);
 
-  const handleHomeNavigate = () => {
-    navigate("/");
-  };
-
   return (
     <nav className="lg:light-shadow flex flex-col-reverse items-center justify-between gap-4 bg-transparent px-4 py-2 lg:flex-row lg:gap-16 lg:px-8 lg:py-4">
       <div className="hidden w-full items-center justify-center gap-4 lg:flex">
         <div
           className="flex cursor-pointer items-center gap-4"
-          onClick={handleHomeNavigate}
+          onClick={() => {
+            setQuery("");
+            navigate("/");
+          }}
         >
           <img
             src={logo}
@@ -46,7 +45,7 @@ export const NavBar = () => {
       <SearchBar
         value={query}
         onChange={(query) => setQuery(query)}
-        onEnterKeyPress={handleHomeNavigate}
+        onEnterKeyPress={() => navigate("/")}
       />
 
       <div className="flex w-full items-center justify-evenly gap-8">
