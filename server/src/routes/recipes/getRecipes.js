@@ -20,7 +20,7 @@ export const getRecipes = async (req, res, next) => {
 
     return res.status(404).send("Recipes not found");
   } catch (error) {
-    console.error(`Failed to get recipes: ${error}`);
+    console.error(`Failed to get recipes for query ${query}: ${error}`);
     next(error);
   }
 };
@@ -51,7 +51,9 @@ const getInternalRecipes = async (query) => {
 
     return dbRecipes;
   } catch (error) {
-    console.error(`Failed to get internal recipes: ${error}`);
+    console.error(
+      `Failed to get internal recipes for query ${query}: ${error}`,
+    );
     return [];
   }
 };
