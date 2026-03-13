@@ -33,7 +33,10 @@ export const RecipesFeed = () => {
     return <Loading />;
   }
 
-  if (recipesStatus === fetchStatus.NOT_FOUND) {
+  if (
+    recipesStatus === fetchStatus.NOT_FOUND ||
+    recipesStatus === fetchStatus.ERROR
+  ) {
     return (
       <Wrapper
         diets={diets}

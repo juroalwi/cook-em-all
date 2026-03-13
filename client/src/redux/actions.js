@@ -35,7 +35,6 @@ export const fetchDiets = () => {
         payload: diets,
       });
     } catch (error) {
-      console.error(error);
       dispatch({
         type: SET_DIETS_STATUS,
         payload: fetchStatus.ERROR,
@@ -74,7 +73,6 @@ export const fetchRecipes = (query) => {
         payload: recipes,
       });
     } catch (error) {
-      console.error(error);
       dispatch({
         type: SET_RECIPES_STATUS,
         payload: fetchStatus.ERROR,
