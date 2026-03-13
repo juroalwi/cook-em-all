@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useScreenSize } from "src/hooks/useScreenSize";
-import { Image } from "src/components/Image";
+import { RecipeImage } from "src/components/RecipeImage";
 import { Loading } from "src/components/Loading";
 import { StarRating } from "src/components/StarRating";
 import { Tag } from "src/components/Tag";
@@ -90,7 +90,7 @@ export const RecipeDetail = () => {
 const Content = ({ details }) => {
   return (
     <div className="flex grow flex-col p-4">
-      <Image src={details.image} className="h-80 lg:h-100" />
+      <RecipeImage src={details.image} className="h-80 lg:h-100" />
 
       <div className="flex flex-col gap-3 px-4 pt-4 lg:gap-5">
         <h1 className="line-clamp-3 text-lg font-medium tracking-wide uppercase lg:text-2xl">
