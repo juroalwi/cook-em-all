@@ -8,6 +8,7 @@ import { Loading } from "src/components/Loading";
 import { StarRating } from "src/components/StarRating";
 import { Tag } from "src/components/Tag";
 import { RecipeNotFound } from "./RecipeNotFound";
+import ingredientsBackground from "src/media/images/ingredients-background.jpg";
 
 export const RecipeDetail = () => {
   const { id } = useParams();
@@ -75,7 +76,7 @@ export const RecipeDetail = () => {
 
         <div
           style={{
-            backgroundImage: "url(/recipe-detail.jpg)",
+            backgroundImage: `url(${ingredientsBackground})`,
             backgroundPosition: "right center",
             backgroundSize: "cover",
           }}
