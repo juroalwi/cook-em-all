@@ -15,17 +15,13 @@ export const getRecipeDetail = async (req, res, next) => {
       return res.status(200).send(internalRecipe);
     }
 
-    if (!internalRecipe && id.includes("CREATED_")) {
-      return res.status(404).send("Recipe not found");
-    }
-
     const externalRecipe = await getExternalRecipe(id);
 
-    if (!externalRecipe) {
-      return res.status(404).send("Recipe not found");
+    if (externalRecipe) {
+      return res.status(200).send(externalRecipe);
     }
 
-    return res.status(200).send(externalRecipe);
+    return res.status(404).send("Recipe not found");
   } catch (error) {
     console.error(`Failed to get recipe detail ${id}: ${error}`);
     next(error);
@@ -65,14 +61,11 @@ const getInternalRecipe = async (id) => {
 
 const getExternalRecipe = async (id) => {
   try {
-    const response = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.API_KEY}`,
-    );
-
-    const recipe = response.data;
-
-    const { id, title, image, diets, summary, spoonacularScore, healthScore } =
-      recipe;
+    const recipe = (
+      await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.API_KEY}`,
+      )
+    ).data;
 
     const instructions =
       recipe.analyzedInstructions.length > 0
@@ -80,17 +73,17 @@ const getExternalRecipe = async (id) => {
         : [];
 
     return {
-      id,
-      title,
-      image,
-      diets,
-      summary: summary.replace(/<[^>]*>?/g, ""),
-      score: spoonacularScore,
-      healthScore,
+      id: recipe.id,
+      title: recipe.title,
+      image: recipe.image,
+      diets: recipe.diets,
+      summary: recipe.summary.replace(/<[^>]*>?/g, ""),
+      score: recipe.spoonacularScore,
+      healthScore: recipe.healthScore,
       instructions,
     };
   } catch (error) {
-    console.error(`Failed to get internal recipe detail ${id}: ${error}`);
+    console.error(`Failed to get external recipe detail ${id}: ${error}`);
     return null;
   }
 };
