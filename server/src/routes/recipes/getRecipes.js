@@ -6,33 +6,19 @@ export const getRecipes = async (req, res, next) => {
   const query = req.query.title?.toLowerCase();
 
   try {
-    const [internalResult, externalResult] = await Promise.allSettled([
-      getInternalRecipes(query),
-      getExternalRecipes(query),
-    ]);
+    const internalRecipes = await getInternalRecipes(query);
 
-    const recipes = [];
-
-    if (
-      internalResult.status === "rejected" &&
-      externalResult.status === "rejected"
-    ) {
-      throw new Error(
-        `Both internal and external recipes fetching failed: ${internalResult.reason}; ${externalResult.reason}`,
-      );
+    if (internalRecipes.length > 0) {
+      return res.send(internalRecipes);
     }
 
-    if (internalResult.status === "fulfilled") {
-      recipes.push(...internalResult.value);
+    const externalRecipes = await getExternalRecipes(query);
+
+    if (externalRecipes.length > 0) {
+      return res.send(externalRecipes);
     }
 
-    if (externalResult.status === "fulfilled") {
-      recipes.push(...externalResult.value);
-    }
-
-    const uniqueRecipes = [...new Map(recipes.map((r) => [r.id, r])).values()];
-
-    return res.send(uniqueRecipes);
+    return res.status(404).send("Recipes not found");
   } catch (error) {
     console.error(`Failed to get recipes: ${error}`);
     next(error);
@@ -66,7 +52,7 @@ const getInternalRecipes = async (query) => {
     return dbRecipes;
   } catch (error) {
     console.error(`Failed to get internal recipes: ${error}`);
-    throw error;
+    return [];
   }
 };
 
@@ -102,7 +88,9 @@ const getExternalRecipes = async (query) => {
 
     return apiRecipes;
   } catch (error) {
-    console.error(`Failed to get external recipes: ${error}`);
-    throw error;
+    console.error(
+      `Failed to get external recipes for query ${query}: ${error}`,
+    );
+    return [];
   }
 };
