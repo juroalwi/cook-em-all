@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecipes } from "src/hooks/useRecipes.js";
-import logo from "src/media/images/logo.svg";
 
 export const NavBar = () => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ export const NavBar = () => {
           }}
         >
           <img
-            src={logo}
+            src="/logo.svg"
             className="h-17.5 invert-100"
             alt="Cook 'Em All Logo"
           />
